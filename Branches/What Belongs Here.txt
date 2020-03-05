@@ -1,0 +1,8 @@
+This folder should contain the files for Any Branches that are written.
+
+When branching off an existing story, add a new folder for that branch, and a put shortcut to the place it branches in from.
+The Shortcut should be called the name of wherever it is branching in from.
+
+In that new folder should cpp and h files, seperated into thier own folders.
+
+Check (Example Branch) For an example.

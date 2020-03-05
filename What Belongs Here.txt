@@ -1,0 +1,9 @@
+This Folder should contain the main.cpp file, TheGameOfJim.sln file, and Any other information directly related to the game.
+
+No other code should be stored here (store them in /Systems or /Branches)
+
+/Project1 should be stored here. (Do not modify it unless you know what you're doing!)
+
+.vs may be here, but it SHOULD NOT be committed to git.
+
+.git should be stored here. (Do not modify it unless you know what you're doing!)

@@ -1,0 +1,4 @@
+﻿  main.cpp
+d:\college\csi281\vectors\default\main.cpp(21): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+d:\college\csi281\vectors\default\main.cpp(66): warning C4018: '<': signed/unsigned mismatch
+  Project1.vcxproj -> D:\College\CSI281\Vectors\Default\Debug\Default.exe
