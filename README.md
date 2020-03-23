@@ -1,3 +1,13 @@
+# What is this?
+---
+This is a project for the Champlain College class CSI-280 Innovation II: Open Source Software Dev, taught by Chris Bendel.
+
+## Goals
+
+Imitate a open source project development team.
+
+Make a text based adventure game in C++.
+
 # Setup
 ---
 ## Downloads
@@ -43,3 +53,24 @@ Open [Visual Stuido 2017](https://visualstudio.microsoft.com/vs/older-downloads/
 4. Change the Launch File
 
 ![Visual Studio Setup 4](/images/VisualStudio_4.png)
+
+# Members
+---
+
+Michael Bamford
+
+Aiden Tracy
+
+Jacob Humphrey
+
+Hayden Stegman
+
+Collin Westgate
+
+Griffen Baxter
+
+Noah PattersonLabaw
+
+Phillip Bell
+
+Jasmine Carr
