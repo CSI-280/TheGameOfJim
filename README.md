@@ -12,7 +12,7 @@
 
 1. Press the button in the red square.
 
-ADD Picture
+![Clone](/images/Clonegit.PNG)
 
 2. Open [Git Bash](https://gitforwindows.org/)
 
@@ -30,16 +30,16 @@ Open [Visual Stuido 2017](https://visualstudio.microsoft.com/vs/older-downloads/
 
 1. Click the File button on the top left corner.
 
-ADD Picture
+![Visual Studio Setup 1](/images/VisualStudio_1.PNG)
 
 2. Open a Folder.
 
-ADD Picture
+![Visual Studio Setup 2](/images/VisualStudio_2.PNG)
 
 3. Go to Where the Repository is, should be called **TheGameOfJim**.
 
-ADD Picture
+![Visual Studio Setup 3](/images/VisualStudio_3.PNG)
 
 4. Change the Launch File
 
-ADD Picture
+![Visual Studio Setup 4](/images/VisualStudio_4.png)
