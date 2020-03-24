@@ -54,9 +54,7 @@ class Container
 		void addLink(Link* cLink);
 		void addContainerDescription(vector<string> cDescription);
 		void addLinkDescription(vector<string> cDescription);
-		void printAll();
-		void executeAddItem(Item* cItem);
-		Item* executeTakeItem(int index);
+		void printAll(bool printName = false);
 		int executeContainer();
 };
 
@@ -78,6 +76,6 @@ class Room
 		void addLink(Link* cLink);
 		void addRoomDescription(vector<string> cDescription);
 		void addLinkDescription(vector<string> cDescription);
-		void printAll();
+		void printAll(bool printName = false);
 		int executeRoom();
 };
