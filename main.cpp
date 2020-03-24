@@ -8,6 +8,7 @@
 #include <math.h>
 #include <vector>
 #include <list>
+#include "enemies.h"
 using namespace std;
 
 int main()

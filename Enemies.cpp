@@ -1,30 +1,25 @@
-#include  "main.cpp"
 #include "enemies.h"
 
-using namespace std;
 
-class enemies {
-Private :
-	//armor MIGHT be a damage reduction based on level
-	//speed can dictate who attacks first and if the speed is high enough, possibly the enemy can attack twice before the player
+//default constructor	
+Enemies::Enemies()
+{
+	mHealth = 100;
+	mArmor = 100;
+	mSpeed = 100;
+	mName = "Billy the Bin";
+}
+
+//Overloaded constructor
+Enemies::Enemies(int health, int armor, int speed, string name) 
+{
+	mHealth = health;
+	mArmor = armor;
+	mSpeed = speed;
+	mName = name;
+
+}
 
 
-Public :
-	getSpeed() { return speed; }
-	setSpeed(newSpeed) { speed == newSpeed; }
-
-	getArmor() { return armor; }
-	setArmor(newArmor) { armor == newArmor; }
-
-	getHealth() { return health; }
-	setHealth(newHealth) { health == newHealth; }
-
-	getName() { return name; }
-	setName(newName) { name == newName; }
-
-	attack(/*player class type*/) {
-
-	}
 
 	
-};

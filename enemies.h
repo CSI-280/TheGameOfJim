@@ -1,28 +1,43 @@
 #pragma once
-#include  "main.cpp"
+#include <iostream>
+#include <string>
+#include <fstream>
+#include <ctime>
+#include <cstdlib>
+#include <iomanip>
 
 using namespace std;
 
-class enemies {
-Private:
+class Enemies {
+
+private:
 	//armor MIGHT be a damage reduction based on level
-	//speed can dictate who attacks first and if the speed is high enough, possibly the enemy can attack twice before the player
-	int health, armor, speed;
-	string name;
+	//mSpeed can dictate who attacks first and if the mSpeed is high enough, possibly the enemy can attack twice before the player
+	int mHealth, mArmor, mSpeed;
+	string mName;
 
-Public:
-	int getSpeed();
-	setSpeed(int);
 
-	int getArmor();
-	setArmor(int);
+public:
+	//constructors
+	 Enemies();
+	 Enemies(int, int, int, string);
+	
+	//destructor
+	~enemies();
 
-	int getHealth();
-	setHealth(int);
+	//getters
+	int getSpeed() { return mSpeed; };
+	int getArmor() { return mArmor; };
+	int getHealth() { return mHealth; };
+	string getName() { return mName; };
 
-	string getName();
-	setName(string);
+	//setters
+	void setSpeed(int speed) { mSpeed = speed; };
+	void setArmor(int armor) { mArmor = armor; };
+	void setHealth(int health) { mHealth = health; };
+	void setName(string name) { mName = name; };
 
-	attack(/*player class type*/);
+
+
 
 };
