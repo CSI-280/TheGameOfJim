@@ -10,17 +10,19 @@
 #include <list>
 #include "Systems\enemies.h"
 #include "Systems\Combat.h"
+#include "Branches/intro.h"
 using namespace std;
 
 int main()
 {
-
+	
 	cout << "InitialCode" << endl;
 
 	Enemies testEnemy;
 	Player testPlayer;
+	intro(testPlayer);
 
-	combat(testPlayer, testEnemy);
+	// combat(testPlayer, testEnemy);
 
 	string noQuit;
 	cin >> noQuit;
