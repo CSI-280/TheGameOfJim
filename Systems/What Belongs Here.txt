@@ -1,0 +1,6 @@
+This folder shouldn't contain anything else.
+
+the .cpp and .h folders should contain the respective file types for any SYSTEMS in the game.
+
+Inventories, Players, Combat, data that will be needed across multiple branches.
+
