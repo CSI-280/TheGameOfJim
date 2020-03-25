@@ -8,5 +8,5 @@ class Item
 private:
 
 public:
-
+	string name;
 };
