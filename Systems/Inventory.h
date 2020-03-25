@@ -15,7 +15,7 @@ public:
 	~Inventory();
 
 	bool checkPlayerInventoryForItem(Item item);
-	
+	Item getItem(int index);
 	void removeItemFromPlayerInventory(Item item);
 	bool addItemToPlayerInventory(Item item);
 

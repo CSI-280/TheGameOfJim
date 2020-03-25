@@ -4,7 +4,7 @@
 
 using namespace std;
 
-Inventory:Inventory() //Empty For Now - In Future player could have starting items.
+Inventory::Inventory() //Empty For Now - In Future player could have starting items.
 {
 
 }
@@ -27,6 +27,11 @@ bool Inventory::checkPlayerInventoryForItem(Item item)
 	}
 
 	return false;
+}
+
+Item Inventory::getItem(int index)
+{
+	return PlayerInventory[index];
 }
 
 //Searches for the item that is attempting to be removed. If it is not there it does nothing

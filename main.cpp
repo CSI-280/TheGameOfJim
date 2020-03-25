@@ -8,8 +8,8 @@
 #include <math.h>
 #include <vector>
 #include <list>
-#include "enemies.h"
-#include "Combat.h"
+#include "Systems\enemies.h"
+#include "Systems\Combat.h"
 using namespace std;
 
 int main()
