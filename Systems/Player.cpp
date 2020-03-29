@@ -34,7 +34,16 @@ int Player::getPlayerSpeed() { return mSpeed; }
 
 void Player::setPlayerName(string name) { mName = name; }
 
-void Player::setPlayerHealth(int health) { mHealth = health; }
+// setter for health 
+// checks if player is dead
+void Player::setPlayerHealth(int health) { 
+	mHealth = health;
+
+	if (Player.mHealth <= 0) {
+		// Function for death
+	}
+
+}
 
 void Player::setPlayerAttack(int attack) { mAttack = attack; }
 
