@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "GameOver.h"
 #include <iostream>
 
 using namespace std;
@@ -39,8 +40,8 @@ void Player::setPlayerName(string name) { mName = name; }
 void Player::setPlayerHealth(int health) { 
 	mHealth = health;
 
-	if (Player.mHealth <= 0) {
-		// Function for death
+	if (mHealth <= 0) {
+		gameOver();
 	}
 
 }
