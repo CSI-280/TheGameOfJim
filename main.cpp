@@ -8,6 +8,7 @@
 #include <math.h>
 #include <vector>
 #include <list>
+#include "Systems\Player.h"
 #include "Systems\enemies.h"
 #include "Systems\Combat.h"
 #include "Branches/intro.h"
