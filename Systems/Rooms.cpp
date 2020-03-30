@@ -2,30 +2,55 @@
 
 #include "Rooms.h"
 
-Link::Link(Container* cContainer)
+void loadBranchExample(unordered_map<string, Room> Rooms, unordered_map<string, Link> Links, unordered_map<string, Container> Container)
 {
+	Room dummyRoom("DummyRoom");
+	Rooms.insert(pair<string,Room>(dummyRoom.getName(), dummyRoom));
+	//Link dummyLink("DummyLink", Rooms["DummyRoom"])
+	//Links.insert(pair<string, Link>(dummyLink.getName(), dummyLink));
+	//Rooms["DummyRoom"].addLink(Links["DummyLink"])
+}
+
+void playGame(Link* cLink) 
+{
+	while (cLink != nullptr)
+	{
+		cLink = (*cLink).follow();
+	}
+}
+
+Link::Link(string cName, Container* cContainer)
+{
+	mName = cName;
 	mType = true;
 	mContainer = cContainer;
 	mRoom = nullptr;
 }
 
-Link::Link(Room* cRoom)
+Link::Link(string cName, Room* cRoom)
 {
+	mName = cName;
 	mType = false;
 	mContainer = nullptr;
 	mRoom = cRoom;
 }
 
-void Link::follow()
+string Link::getName()
+{
+	return mName;
+}
+
+Link* Link::follow()
 {
 	if (mType)
 	{
-		(*mContainer).executeContainer();
+		return (*mContainer).executeContainer();
 	}
 	else
 	{
-		(*mRoom).executeRoom();
+		return (*mRoom).executeRoom();
 	}
+	return nullptr;
 }
 
 Container::Container(string cName, Inventory* cTrackedInventory, bool cStorage, bool cTakeable)
@@ -34,6 +59,11 @@ Container::Container(string cName, Inventory* cTrackedInventory, bool cStorage, 
 	mTrackedInventory = cTrackedInventory;
 	storage = cStorage;
 	takeable = cTakeable;
+}
+
+string Container::getName()
+{
+	return mName;
 }
 
 void Container::addLink(Link* cLink)
@@ -78,7 +108,7 @@ void Container::printAll(bool printName)
 	{
 		cout << i << ") " << mLinkDescription[i] << endl;
 	}
-	if (takeable && mItems.size != 0)
+	if (takeable && mItems.size() != 0)
 	{
 		cout << i << ") Take Items" << endl;
 		i++;
@@ -90,23 +120,23 @@ void Container::printAll(bool printName)
 
 }
 
-int Container::executeContainer()
+Link* Container::executeContainer()
 {
 	int choice, choice2;
 	int i;
 	bool input = true;
 	printAll();
-	cout << "What will you do? (Please input a number.)" << endl;
-	cin >> choice;
 	cout << endl;
 	do
 	{
+		cout << "What will you do? (Please input a number.)" << endl;
+		cin >> choice;
 		if (choice < mLinks.size())
 		{
 			input = true;
 			if ((*mLinks[choice]).checkConditions())
 			{
-				(*mLinks[choice]).follow();
+				return &(*mLinks[choice]);
 			}
 			else
 			{
@@ -114,7 +144,7 @@ int Container::executeContainer()
 				input = false;
 			}
 		}
-		else if (choice == mLinks.size() && takeable && mItems.size != 0)
+		else if (choice == mLinks.size() && takeable && mItems.size() != 0)
 		{
 			input = false;
 			cout << "0) Take Nothing." << endl;
@@ -128,10 +158,10 @@ int Container::executeContainer()
 			if (choice2 > 0 && choice2 <= mItems.size())
 			{
 				(*mTrackedInventory).addItemToPlayerInventory(mItems[choice2 - 1]);
-				mItems.erase(mItems.begin + (choice2 - 1));
+				mItems.erase(mItems.begin() + (choice2 - 1));
 			}
 		}
-		else if ((choice == mLinks.size() + 1 && takeable && mItems.size != 0 && storage) || (choice == mLinks.size() && (!takeable || !mItems.size != 0) && storage))
+		else if ((choice == mLinks.size() + 1 && takeable && mItems.size() != 0 && storage) || (choice == mLinks.size() && (!takeable || !mItems.size() != 0) && storage))
 		{
 			input = false;
 			cout << "0) Store Nothing." << endl;
@@ -154,12 +184,17 @@ int Container::executeContainer()
 			input = false;
 		}
 	} while (!input);
-
+	return nullptr;
 }
 
 Room::Room(string cName)
 {
 	mName = cName;
+}
+
+string Room::getName()
+{
+	return mName;
 }
 
 void Room::addLink(Link* cLink)
@@ -196,10 +231,9 @@ void Room::printAll(bool printName)
 	}
 }
 
-int Room::executeRoom()
+Link* Room::executeRoom()
 {
-	int choice, choice2;
-	int i;
+	int choice;
 	bool input = true;
 	printAll();
 	do
@@ -213,7 +247,7 @@ int Room::executeRoom()
 			input = true;
 			if ((*mLinks[choice]).checkConditions())
 			{
-				(*mLinks[choice]).follow();
+				return &(*mLinks[choice]);
 			}
 			else
 			{
@@ -226,4 +260,5 @@ int Room::executeRoom()
 			input = false;
 		}
 	} while (!input);
+	return nullptr;
 }
