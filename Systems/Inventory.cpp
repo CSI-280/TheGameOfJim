@@ -9,10 +9,14 @@ Inventory::Inventory() //Empty For Now - In Future player could have starting it
 
 }
 
-
 Inventory::~Inventory() 
 {
 
+}
+
+Item Inventory::getItem(int index)
+{
+	return PlayerInventory[index];
 }
 
 bool Inventory::checkPlayerInventoryForItem(Item item)
@@ -29,9 +33,17 @@ bool Inventory::checkPlayerInventoryForItem(Item item)
 	return false;
 }
 
-Item Inventory::getItem(int index)
+//Gets the index of an Item
+int getIndexOfItem(Item item)
 {
-	return PlayerInventory[index];
+	for (int i = 0; i < PlayerInventory.size(); i++)
+	{
+		if (PlayerInventory[i] = item)
+		{
+			return i;
+		}
+	}
+	return null;
 }
 
 //Searches for the item that is attempting to be removed. If it is not there it does nothing
@@ -47,8 +59,7 @@ void Inventory::removeItemFromPlayerInventory(Item item)
 	}
 }
 
-
-//Adds the item to the inventory, returns true if successfull.
+//Adds the item to the inventory
 void Inventory::addItemToPlayerInventory(Item item)
 {
 	for (int i = 0; i < PlayerInventory.size(); i++)
@@ -56,13 +67,43 @@ void Inventory::addItemToPlayerInventory(Item item)
 		if (PlayerInventory[i] = NULL)
 		{
 			PlayerInventory[i] = item;
-			return true;
 		}
 	}
-
-	return false;
 }
 
+void Inventory::swapIntoActiveInventory(int activeIndex, int playerIndex)
+{
+	//Items you are swapping
+	Item activeItem = ActiveInventory[activeIndex];
+	Item playerItem = PlayerInventory[playerIndex];
+	
+	//This is the type of slot that you are attempting to swap into.
+	string reqType;
+	if (activeIndex == 0)
+	{
+		reqType = "Weapon";
+	}
+	if (activeIndex == 1)
+	{
+		reqType = "HeadArmor";
+	}
+	if (activeIndex == 2)
+	{
+		reqType = "BodyArmor";
+	}
+	if (activeIndex == 3)
+	{
+		reqType = "LegArmor";
+	}
+
+	//If the type of the slot you are swaping into to is the same
+	//the item you are swaping in, then swap. Otherwise dont do anything.
+	if (activeItem.getType() == reqType)
+	{
+		ActiveInventory[activeIndex] = playerItem;
+		PlayerInventory[playerIndex] = activeItem;
+	}
+}
 
 int Inventory::getPlayerInventorySize() { return PlayerInventory.size(); }
 
