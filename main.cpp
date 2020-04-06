@@ -9,6 +9,7 @@
 #include <vector>
 #include <list>
 #include <unordered_map>
+#include "Systems\Player.h"
 #include "Systems\enemies.h"
 #include "Systems\Combat.h"
 #include "Systems\Rooms.h"
