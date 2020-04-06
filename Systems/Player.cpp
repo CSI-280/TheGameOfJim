@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "GameOver.h"
 #include <iostream>
 
 using namespace std;
@@ -50,7 +51,6 @@ int Player::getPlayerExp() { return mExp; }
 
 int Player::getPlayerExpNeeded() { return mExpNeeded;}
 
-
 void Player::setPlayerName(string name) { mName = name; }
 
 void Player::setPlayerGender(string gender) { mGender = gender; }
@@ -74,7 +74,17 @@ void Player::setPlayerPronouns(string gender)
 	}
 }
 
-void Player::setPlayerHealth(int health) { mHealth = health; }
+// setter for health 
+// checks if player is dead
+void Player::setPlayerHealth(int health) { 
+	mHealth = health;
+
+	if (mHealth <= 0) {
+		gameOver();
+	}
+
+}
+
 
 void Player::setPlayerAttack(int attack) { mAttack = attack; }
 
