@@ -32,13 +32,14 @@ class Link
 	public:
 		Link(string cName, Container* cContainer);
 		Link(string cName, Room* cRoom);
+		Link() {};
 		string getName();
 		virtual bool checkConditions() = 0;
 		Link* follow();
 };
 
 void playGame(Link* cLink);
-void loadBranchExample(unordered_map<string,Room> Rooms, unordered_map<string, Link> Links, unordered_map<string, Container> Container);
+//void loadBranchExample(unordered_map<string,Room*> Rooms, unordered_map<string, Link*> Links, unordered_map<string, Container*> Containers);
 
 class Container
 {
@@ -50,7 +51,7 @@ class Container
 	Containers need a pointer to the inventory to modify it. (Likely the player's.)
 	*/
 	private:
-		vector<Item> mItems;
+		vector<Item*> mItems;
 		Inventory* mTrackedInventory;
 		bool storage;
 		bool takeable;
@@ -61,6 +62,7 @@ class Container
 	public:
 		Container(string cName, Inventory* cTrackedInventory, bool cStorage = true, bool cTakeable = true);
 		string getName();
+		void addItems(Item* cItem);
 		void addLink(Link* cLink);
 		void addContainerDescription(vector<string> cDescription);
 		void addLinkDescription(vector<string> cDescription);
