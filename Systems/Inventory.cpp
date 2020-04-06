@@ -99,7 +99,7 @@ void Inventory::swapInventorySpaces(Item item1, Item item2) {
 	}
 	temp = PlayerInventory[index1];
 	PlayerInventory[index1] = PlayerInventory[index2];
-	PlayerInventory[index2] = temp
+	PlayerInventory[index2] = temp;
 }
 
 //Searches for the item that is attempting to be removed. If it is not there it does nothing
