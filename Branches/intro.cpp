@@ -10,6 +10,10 @@ using namespace std::this_thread;
 using namespace std::chrono;
 
 string playerName;
+string playerGender;
+string playerPronoun1;
+string playerPronoun2;
+string playerPronoun3;
 string returnPlayerName;
 Player testPlay;
 
@@ -42,6 +46,22 @@ void intro(Player thePlayer)
 	thePlayer.setPlayerName(playerName);
 	playerName = thePlayer.getPlayerName();
 	
+	
+	// Get player Gender
+	cout << "Along with this we need the gender of the subject. \n";
+	sleep_for(seconds(2));
+	cout << "So what gender do you want to give the subject? (Please be sure to properly capitalize) \n \n"
+		;
+	
+	// Get gender input from user and put into Player object, and then get pronouns
+	cin >> playerGender;
+	thePlayer.setPlayerGender(playerGender);
+	playerGender = thePlayer.getPlayerGender();
+	thePlayer.setPlayerPronouns(playerGender);
+	playerPronoun1 = thePlayer.getPlayerPronoun1();
+	playerPronoun2 = thePlayer.getPlayerPronoun2();
+	playerPronoun3 = thePlayer.getPlayerPronoun3();
+
 	// Judge the player's choice of name
 	cout << "\n" << playerName << "? ";
 	sleep_for(seconds(1));
@@ -53,7 +73,7 @@ void intro(Player thePlayer)
 	sleep_for(seconds(3));
 	cout << "Anyway, ";
 	sleep_for(seconds(2));
-	cout << "time for you to take control of " << playerName << "'s life, so let's transition to the simulation now. \n \n";
+	cout << "time for you to take control of " << playerName << "'s life, so let's transition to the simulation now and see how " << playerPronoun1 << " is doing. \n \n";
 	sleep_for(seconds(3));
 
 	// Transition to the story

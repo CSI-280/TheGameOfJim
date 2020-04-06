@@ -1,6 +1,6 @@
 #include "Combat.h"
 
-void combat(Player thePlayer, Enemies theEnemy/*, Inventory playerInventory (if necessary later)*/)
+bool combat(Player thePlayer, Enemies theEnemy/*, Inventory playerInventory (if necessary later)*/)
 {
 	//grab the player's values. this can be updated later to handle inventory changes.
 	int health = thePlayer.getPlayerHealth();
@@ -16,6 +16,7 @@ void combat(Player thePlayer, Enemies theEnemy/*, Inventory playerInventory (if 
 	string enemyName = theEnemy.getName();
 
 	bool encounterActive = true;
+	bool death = false;
 	int choice;
 
 	while (encounterActive == true)
@@ -26,8 +27,8 @@ void combat(Player thePlayer, Enemies theEnemy/*, Inventory playerInventory (if 
 		cout << "You are faced by " + enemyName + ", what do you do?" << endl;
 		cout << "1. Light Attack" << endl
 			<< "2. Strong Attack" << endl
-			<< "3. Use Item" << endl
-			<< "4. Run" << endl;
+			<< "3. Defend" << endl
+			<< "4. Use Item" << endl;
 
 		cin >> choice;
 
@@ -35,24 +36,24 @@ void combat(Player thePlayer, Enemies theEnemy/*, Inventory playerInventory (if 
 		{
 		case 1:
 			//Light attack, normal speed. We can change these later if we want to use different menu options or balancing.
-			encounterActive = damageCalc(health, defense, speed, attack, enemyHealth, enemyDefense, enemySpeed, enemyAttack, name, enemyName, encounterActive);
+			encounterActive = damageCalc(health, defense, speed, attack, enemyHealth, enemyDefense, enemySpeed, enemyAttack, name, enemyName, encounterActive, death);
 			system("pause");
 			system("cls");
 			break;
 		case 2:
 			//Strong attack, lower speed but higher attack. We can also rebalance this later.
-			encounterActive = damageCalc(health, defense, speed - 2, attack + 3, enemyHealth, enemyDefense, enemySpeed, enemyAttack, name, enemyName, encounterActive);
+			encounterActive = damageCalc(health, defense, speed - 2, attack + 3, enemyHealth, enemyDefense, enemySpeed, enemyAttack, name, enemyName, encounterActive, death);
 			system("pause");
 			system("cls");
 			break;
 		case 3:
-			//To be added once inventory is all set up. Could also be replaced with a different option like "Defend" or something.
+			//Testing a "Defend" option that increases player defense but cuts speed and attack.
+			encounterActive = damageCalc(health, defense + 10, speed - 10, attack - 3, enemyHealth, enemyDefense, enemySpeed, enemyAttack, name, enemyName, encounterActive, death);
 			system("pause");
 			system("cls");
 			break;
 		case 4:
-			//To be added once the random number generator is set up. 
-			//Planning to make it so if player speed is higher than enemy, they can always run, but if lower it could be decided by giving it a (player speed / enemy speed) chance.
+			//Originally meant to be run, figured that might make progression screwy. For now this will be use item once we have consumables.
 			system("pause");
 			system("cls");
 			break;
@@ -63,49 +64,106 @@ void combat(Player thePlayer, Enemies theEnemy/*, Inventory playerInventory (if 
 		}
 	}
 
-	//Encounter is over. For now this just handles setting the player's health to their new amount. If we don't want this it can be changed later.
+	//Encounter is over. Return whether or not player died.
+	if (death == false)
+		thePlayer.setPlayerHealth(health);
 
-	thePlayer.setPlayerHealth(health);
-
-	//This is where we'll handle drops and returning to the room once those are set up.
+	return death;
 
 }
 
-bool damageCalc(int& health, int defense, int speed, int attack, int& enemyHealth, int enemyDefense, int enemySpeed, int enemyAttack, string name, string enemyName, bool encounterActive)
+bool damageCalc(int& health, int defense, int speed, int attack, int& enemyHealth, int enemyDefense, int enemySpeed, int enemyAttack, string name, string enemyName, bool encounterActive, bool& death)
 {
+	bool miss = false;
+
 	if (speed >= enemySpeed) // Player gets first attack
 	{
-		//I'm going to leave out defense calculations for now until we decide how we want them set up. We can also work on miss/crit RNG later.
-		enemyHealth -= attack;
-		cout << "You deal " << attack << " damage to " << enemyName << endl;
+		// 10% chance for crits and misses
+		if (random(10) == 1)
+			attack *= 2; //Crit!
+		else if (random(10) == 2)
+			miss = true; //Miss!
+
+		if (miss == false) //If the player didn't miss
+			//Basic defense calculation, remove defense as a percentage of health.
+			enemyHealth -= attack - (attack * (enemyDefense * 0.01));
+
+		if (miss == true)
+			cout << "You missed!" << endl;
+		else
+			cout << "You deal " << attack - (attack * (enemyDefense * 0.01)) << " damage to " << enemyName << endl;
 		if (enemyHealth <= 0)
 		{
 			cout << "You defeated " << enemyName << "!" << endl;
 			encounterActive = false;
 			return encounterActive;
 		}
-		health -= enemyAttack;
-		cout << enemyName << " deals " << enemyAttack << " damage to you." << endl;
+		miss = false; // Reset miss value
+
+		// 10% chance for crits and misses
+		if (random(10) == 1)
+			enemyAttack *= 2; //Crit!
+		else if (random(10) == 2)
+			miss = true; //Miss!
+
+		if (miss == false) //If the enemy didn't miss
+			//Basic defense calculation, remove defense as a percentage of health.
+			health -= enemyAttack - (enemyAttack * (defense * 0.01));
+
+		if (miss == true)
+			cout << enemyName << " missed!" << endl;
+		else
+			cout << enemyName << " deals " << enemyAttack - (enemyAttack * (defense * 0.01)) << " damage to you." << endl;
 		if (health <= 0)
 		{
-			//We'll have to decide what happens on death.
+			//Player has died, update death bool
 			cout << "Out of HP, game over!" << endl;
 			encounterActive = false;
+			death = true;
 			return encounterActive;
 		}
+		miss = false;
 	}
 	else // Enemy gets first attack
 	{
-		health -= enemyAttack;
-		cout << enemyName << " deals " << enemyAttack << " damage to you." << endl;
+
+		// 10% chance for crits and misses
+		if (random(10) == 1)
+			enemyAttack *= 2; //Crit!
+		else if (random(10) == 2)
+			miss = true; //Miss!
+
+		if (miss == false) //If the enemy didn't miss
+			//Basic defense calculation, remove defense as a percentage of health.
+			health -= enemyAttack - (enemyAttack * (defense * 0.01));
+
+		if (miss == true)
+			cout << enemyName << " missed!" << endl;
+		else
+			cout << enemyName << " deals " << enemyAttack - (enemyAttack * (defense * 0.01)) << " damage to you." << endl;
 		if (health <= 0)
 		{
+			//Player has died, update death bool
 			cout << "Out of HP, game over!" << endl;
 			encounterActive = false;
+			death = true;
 			return encounterActive;
 		}
-		enemyHealth -= attack;
-		cout << "You deal " << attack << " damage to " << enemyName << endl;
+
+		// 10% chance for crits and misses
+		if (random(10) == 1)
+			attack *= 2; //Crit!
+		else if (random(10) == 2)
+			miss = true; //Miss!
+
+		if (miss == false) //If the player didn't miss
+			//Basic defense calculation, remove defense as a percentage of health.
+			enemyHealth -= attack - (attack * (enemyDefense * 0.01));
+
+		if (miss == true)
+			cout << "You missed!" << endl;
+		else
+			cout << "You deal " << attack - (attack * (enemyDefense * 0.01)) << " damage to " << enemyName << endl;
 		if (enemyHealth <= 0)
 		{
 			cout << "You defeated " << enemyName << "!" << endl;
@@ -116,5 +174,3 @@ bool damageCalc(int& health, int defense, int speed, int attack, int& enemyHealt
 
 	return encounterActive;
 }
-
-
