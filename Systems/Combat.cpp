@@ -17,11 +17,13 @@ bool combat(Player thePlayer, Enemies theEnemy, Inventory playerInventory)
 
 
 
-	// NOTE: This will probably need to be tweaked in the future, the current system of items doesn't seem to have a proper way to identify what is a weapon, armor piece, consumable, etc.
+	// NOTE: This will need to be tweaked in the future, the current system of items doesn't seem to have a proper way to get the stats of an item from the inventory itself,
+	//       since they exist in a separate class entirely from item.
 	// For now treat this as pseudocode
 
-	//Apply the player's inventory items to their stats. 
+	// Apply the player's inventory items to their stats. 
 	// Since indexes 0 - 3 are the weapons and armor, they will be the only ones that are applied.
+	/*
 	for (int i = 0; i < 4; i++)
 	{
 		if (i == 0) //The weapon slot (0)
@@ -36,7 +38,7 @@ bool combat(Player thePlayer, Enemies theEnemy, Inventory playerInventory)
 		}
 			
 	}
-
+	*/
 
 	bool encounterActive = true;
 	bool death = false;
@@ -78,7 +80,7 @@ bool combat(Player thePlayer, Enemies theEnemy, Inventory playerInventory)
 			break;
 		case 4:
 			//For now this is only set up for healing consumables.
-			useConsumable(thePlayer, health, playerInventory);
+			//useConsumable(thePlayer, health, playerInventory);
 			system("pause");
 			system("cls");
 			break;
@@ -201,7 +203,8 @@ bool damageCalc(int& health, int defense, int speed, int attack, int& enemyHealt
 }
 
 
-// This will also need to be tweaked in the future since there seems to be no reliable way at the moment to tell what items are consumables
+/*
+// This will also need to be tweaked in the future since there seems to be no reliable way at the moment to get the "getHealing" getter from the consumable class out of the inventory
 void useConsumable(Player thePlayer, int& health, Inventory playerInventory)
 {
 	int choice;
@@ -210,7 +213,7 @@ void useConsumable(Player thePlayer, int& health, Inventory playerInventory)
 
 	cout << "What item would you like to use? " << endl;
 
-	for (int i = 4; i <= 15; i++) //Print item choice menu, everything after the active inventory slots (weapons/armor). Could be tweaked later to just show consumables.
+	for (int i = 4; i <= 15; i++) // Print item choice menu, everything after the active inventory slots (weapons/armor). Could be tweaked later to just show consumables.
 		cout << i - 3 << ". " << playerInventory.getItem(i);
 	cout << "0. Cancel" << endl;
 
@@ -220,8 +223,9 @@ void useConsumable(Player thePlayer, int& health, Inventory playerInventory)
 
 		if (choice > 0 && choice <= 12) //Valid choice for now
 		{
-			//There needs to be some way to identify whether or not an item in the inventory is a consumable
-			//Will probably have to be changed in the future.
+			// There needs to be some way to identify whether or not an item in the inventory is a consumable
+			// Will probably have to be changed in the future.
+
 			cout << "You used your " << playerInventory.getItem(choice + 3);
 			theConsumable = playerInventory.getItem(choice + 3);
 			health += theConsumable.getHealing();
@@ -240,3 +244,4 @@ void useConsumable(Player thePlayer, int& health, Inventory playerInventory)
 		}
 	}
 }
+*/
