@@ -1,9 +1,8 @@
 #include "Player.h"
 #include "enemies.h"
+#include "Rand-Num.h"
 
 using namespace std;
 
-//This might be unnecessary
-
-void combat(Player, Enemies/*, Inventory*/);
-bool damageCalc(int&, int, int, int, int&, int, int, int, string, string, bool);
+bool combat(Player, Enemies/*, Inventory*/);
+bool damageCalc(int&, int, int, int, int&, int, int, int, string, string, bool, bool&);

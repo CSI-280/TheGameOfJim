@@ -9,8 +9,12 @@
 #include <math.h>
 #include <vector>
 #include <list>
+#include <unordered_map>
 #include "Item.h"
 #include "Inventory.h"
+
+class Container;
+class Room;
 
 class Link
 {
@@ -24,12 +28,17 @@ class Link
 		Container* mContainer;
 		Room *mRoom;
 		bool mType;
+		string mName;
 	public:
-		Link(Container* cContainer);
-		Link(Room* cRoom);
+		Link(string cName, Container* cContainer);
+		Link(string cName, Room* cRoom);
+		string getName();
 		virtual bool checkConditions() = 0;
-		void follow();
+		Link* follow();
 };
+
+void playGame(Link* cLink);
+void loadBranchExample(unordered_map<string,Room> Rooms, unordered_map<string, Link> Links, unordered_map<string, Container> Container);
 
 class Container
 {
@@ -51,13 +60,14 @@ class Container
 		vector<string> mLinkDescription;
 	public:
 		Container(string cName, Inventory* cTrackedInventory, bool cStorage = true, bool cTakeable = true);
+		string getName();
 		void addLink(Link* cLink);
 		void addContainerDescription(vector<string> cDescription);
 		void addLinkDescription(vector<string> cDescription);
 		Inventory* getTrackedInventory();
 		void setTrackedInventory(Inventory* cTrackedInventory);
 		void printAll(bool printName = false);
-		int executeContainer();
+		Link* executeContainer();
 };
 
 class Room
@@ -75,9 +85,10 @@ class Room
 		vector<string> mLinkDescription;
 	public:
 		Room(string cName);
+		string getName();
 		void addLink(Link* cLink);
 		void addRoomDescription(vector<string> cDescription);
 		void addLinkDescription(vector<string> cDescription);
 		void printAll(bool printName = false);
-		int executeRoom();
+		Link* executeRoom();
 };
