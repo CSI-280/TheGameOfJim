@@ -19,6 +19,12 @@ bool combat(Player thePlayer, Enemies theEnemy/*, Inventory playerInventory (if 
 	bool death = false;
 	int choice;
 
+	//status effects
+	bool isBurned = false;
+	bool isPoisoned = false;
+	bool isAsleep = false;
+	bool isParalyzed = false;
+
 	while (encounterActive == true)
 	{
 		cout << "[ " << name << " ]  " << "HP: " << health << "  ATK: " << attack << "  SPD: " << speed << "  DEF: " << defense << endl;
@@ -173,4 +179,57 @@ bool damageCalc(int& health, int defense, int speed, int attack, int& enemyHealt
 	}
 
 	return encounterActive;
+}
+
+//not sure how to implement turn durations? for example, burn and poison could last 3 turns and then it would go away. 
+void statusBurn(int& health, string name) //takes 10% off of player's current health
+{
+	int burnDamage = health * 0.1;
+	health -= burnDamage;
+
+	cout << name " is burned!\n" << burnDamage << " damage is taken.\n" << health << " HP remains.\n";
+}
+
+bool statusParalysis(int& speed, string name)
+{
+	bool canMove = true;
+	int speedDeduct = speed - 2;
+	if (random(10) == 5) //random chance to be completely paralyzed for a turn
+	{
+		canMove = false;
+		cout << name << " is paralyzed and unable to move!\n";
+		
+		return canMove;
+	}
+
+	cout << name << " is paralyzed! Speed has been reduced.\n";
+
+	return canMove;
+}
+
+bool statusSleep(string name)
+{
+	bool awake = false;
+	if (random(10) == 3 || random(10) == 5) //random chance to wake up again, won't wake up otherwise
+	{
+		bool awake = true;
+		cout << name << " is no longer alseep!\n";
+	}
+	cout << name << " is fast alseep!\n";
+}
+
+void statusPoison(int& health, string name)
+{
+	int poisonDamage = health * 0.2;
+	health -= poisonDamage;
+
+	cout << name << " is poisoned!\n" << poisonDamage << " damage is taken.\n" << health << " HP remains.\n";
+
+	if (random(10) == 9)
+	{
+		poisonDamage = health * 0.3; //crit poison
+		health -= poisonDamage
+
+		cout << name << " has been severely poisoned!\n" << poisonDamage << " damage is taken.\n" << health << " HP remains.\n";
+	}
 }
