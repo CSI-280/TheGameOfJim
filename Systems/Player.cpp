@@ -49,7 +49,9 @@ int Player::getPlayerSpeed() { return mSpeed; }
 
 int Player::getPlayerExp() { return mExp; }
 
-int Player::getPlayerExpNeeded() { return mExpNeeded;}
+int Player::getPlayerExpNeeded() { return mExpNeeded; }
+
+int Player::getPlayerLevel() { return mLevel; }
 
 void Player::setPlayerName(string name) { mName = name; }
 

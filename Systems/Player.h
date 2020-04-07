@@ -25,6 +25,7 @@ public:
 	int getPlayerSpeed();
 	int getPlayerExp();
 	int getPlayerExpNeeded();
+	int getPlayerLevel();
 
 	void setPlayerName(string);
 	void setPlayerGender(string);
