@@ -22,9 +22,9 @@ Item Inventory::getItem(int index)
 bool Inventory::checkPlayerInventoryForItem(Item item)
 {
 	//Loop over the inventory and return true if you find the item.
-	for (int i = 0; i < PlayerInventory.size(); i++)
+	for (int i = 0; i < getPlayerInventorySize(); i++)
 	{
-		if (PlayerInventory[i] = item)
+		if (PlayerInventory[i].getName() == item.getName())
 		{
 			return true;
 		}
@@ -34,26 +34,26 @@ bool Inventory::checkPlayerInventoryForItem(Item item)
 }
 
 //Gets the index of an Item
-int getIndexOfItem(Item item)
+int Inventory::getIndexOfItem(Item item)
 {
-	for (int i = 0; i < PlayerInventory.size(); i++)
+	for (int i = 0; i < getPlayerInventorySize(); i++)
 	{
-		if (PlayerInventory[i] = item)
+		if (PlayerInventory[i].getName() == item.getName())
 		{
 			return i;
 		}
 	}
-	return null;
+	return NULL;
 }
 
 string Inventory::getItemDesc(Item item)
 {
-	errorstring = "No such item is in your inventory"
-	for (int i = 0; i < PlayerInventory.size(); i++)
+	string errorstring = "No such item is in your inventory";
+	for (int i = 0; i < getPlayerInventorySize(); i++)
 	{
-		if (PlayerInventory[i] = item)
+		if (PlayerInventory[i].getName() == item.getName())
 		{
-			descrption = PlayerInventory[i].getDescription()
+			string description = PlayerInventory[i].getDescription();
 			return description;
 		}
 	}
@@ -62,20 +62,22 @@ string Inventory::getItemDesc(Item item)
 
 void Inventory::getPlayerInventory()
 {
-	string inventory = ""
-	for (int i = 0; i < PlayerInventory.size(); i++)
+	string inventory = "";
+	for(int i = 0; i < getPlayerInventorySize(); i++)
 	{
 		//if end of inventory simply add last item
-		if (i == (PlayerInventory.size() - 1) {
-			inventory += PlayerInventory[i].getName()
+		if (i == (getPlayerInventorySize() - 1))
+		{
+			inventory += PlayerInventory[i].getName();
 		}
 		//if not end of inventory add item name and comma for next item
-		else {
-			inventory += PlayerInventory[i].getName() + ", "
+		else 
+		{
+			inventory += PlayerInventory[i].getName() + ", ";
 		}
 	}
 	//print out string containing full inventory item names
-	cout << "Current Inventory: " << inventory << "."
+	cout << "Current Inventory: " << inventory << ".";
 }
 
 //This is going on the assumption that these items are in fact in the inventory
@@ -86,13 +88,13 @@ void Inventory::swapInventorySpaces(Item item1, Item item2) {
 	int index1;
 	int index2;
 	//for loop for finding item's index numbers 
-	for (int i = 0; i < PlayerInventory.size(); i++)
+	for (int i = 0; i < getPlayerInventorySize(); i++)
 	{
-		if (PlayerInventory[i] = item1)
+		if (PlayerInventory[i].getName() == item1.getName())
 		{
 			index1 = i;
 		}
-		else if (PlayerInventory[i] = item2)
+		else if (PlayerInventory[i].getName() == item2.getName())
 		{
 			index2 = i;
 		}
@@ -106,11 +108,12 @@ void Inventory::swapInventorySpaces(Item item1, Item item2) {
 //Otherwise the item is replaced with null
 void Inventory::removeItemFromPlayerInventory(Item item)
 {
-	for (int i = 0; i < PlayerInventory.size(); i++)
+	for (int i = 0; i < getPlayerInventorySize(); i++)
 	{
-		if (PlayerInventory[i] = item)
+		if (PlayerInventory[i].getName() == item.getName())
 		{
-			PlayerInventory[i] = NULL;
+			Item newItem = new Item();
+			PlayerInventory[i] = newItem;
 		}
 	}
 }
@@ -118,9 +121,9 @@ void Inventory::removeItemFromPlayerInventory(Item item)
 //Adds the item to the inventory
 void Inventory::addItemToPlayerInventory(Item item)
 {
-	for (int i = 0; i < PlayerInventory.size(); i++)
+	for (int i = 0; i < getPlayerInventorySize(); i++)
 	{
-		if (PlayerInventory[i] = NULL)
+		if (PlayerInventory[i].getName() == "Default")
 		{
 			PlayerInventory[i] = item;
 		}
@@ -161,6 +164,6 @@ void Inventory::swapIntoActiveInventory(int activeIndex, int playerIndex)
 	}
 }
 
-int Inventory::getPlayerInventorySize() { return PlayerInventory.size(); }
+int Inventory::getPlayerInventorySize() { return PlayerInventorySize; }
 
-int Inventory::getActiveInventorySize() { return ActiveInventory.size(); }
+int Inventory::getActiveInventorySize() { return ActiveInventorySize; }

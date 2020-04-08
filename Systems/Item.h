@@ -20,16 +20,16 @@ private:
 	//Example Types - "HeadArmor", "BodyArmor", "LegArmor", "Weapon", "Key"
 	string mName, mDescription, itemType;
 public:
-	void setName(string name) { mName = name; }
-	void setDescription(string description) { mDescription = description; }
+	void setName(string name) { mName = name; };
+	void setDescription(string description) { mDescription = description; };
 
-	string getDescription() { return mDescription; }
-	string getName() { return mName; }
+	string getDescription() { return mDescription; };
+	string getName() { return mName; };
 	string getType() { return itemType; };
 
 	Item() {
-		setName("Common Key");
-		setDescription("This may be able to open a box.")
+		setName("Default");
+		setDescription("Dafault Item - Useless");
 	}
 
 	Item(string name, string description) {
