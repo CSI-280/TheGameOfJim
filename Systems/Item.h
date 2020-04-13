@@ -22,15 +22,17 @@ private:
 	//Example Types - "HeadArmor", "BodyArmor", "LegArmor", "Weapon", "Key"
 	string mName, mDescription, mItemType;
 public:
+
 	void setName(string name) { mName = name; }
 	void setDescription(string description) { mDescription = description; }
 	void setType(string type) { mItemType = type; }
 
-	string getDescription() { return mDescription; }
-	string getName() { return mName; }
-	string getType() { return mItemType; };
+	string getDescription() { return mDescription; };
+	string getName() { return mName; };
+	string getType() { return itemType; };
 
 	Item() {
+
 		//Random Item from any category
 		int Rand = random(3);
 		if (Rand == 3) {
