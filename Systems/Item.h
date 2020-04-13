@@ -11,7 +11,7 @@
 #include "questItem.h"
 #include "Rand-Num.cpp"
 #include "Player.h"
-#include "TheGameOfJim/main.cpp"
+#include "main.cpp"
 using namespace std;
 
 

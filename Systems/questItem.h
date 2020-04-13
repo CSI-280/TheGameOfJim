@@ -16,7 +16,7 @@ public:
 	questItems() {
 		setName("Broken Key");
 		setDescription("I doesn't seem to work on anything");
-		setUse("N/A")
+		setUse("N/A");
 	}
 	questItems(string use, string description, string name) {
 		setName(name);

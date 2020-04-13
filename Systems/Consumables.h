@@ -6,16 +6,17 @@
 #include <cstdlib>
 #include <iomanip>
 #include "Item.h"
-
+#include "main.cpp"
 using namespace std;
 
 class Consumables : public Item
 {
+public:
 	//constructor and destructor
 	Consumables() {
-		int level = Player::getPlayerLevel();
+		int level = testPlayer.getPlayerLevel();
 		if (level < 3) { level = 3; }
-		int Rand = random(level, level - 2)
+		int Rand = random(level, level - 2);
 		setLevel(Rand);
 		setHealing(Rand * 25);
 		Item::setName("Half Eaten Cookie");

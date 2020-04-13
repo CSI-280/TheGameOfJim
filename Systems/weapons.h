@@ -7,6 +7,7 @@
 #include <iomanip>
 #include "Item.h"
 
+
 using namespace std;
 
 class Weapons : public Item
@@ -14,9 +15,9 @@ class Weapons : public Item
 public:
 	//constructor and destructor
 	Weapons() {
-		int level = Player::getPlayerLevel();//This may need to be changed for it to properly scale
+		int level = getPlayerLevel();//This may need to be changed for it to properly scale
 		if (level < 3) { level = 3; }
-		int Rand = random(level, level - 2)
+		int Rand = random(level, level - 2);
 		setLevel(Rand);
 		setAttack(Rand * 100);
 		Item::setName("Rusty Sword");

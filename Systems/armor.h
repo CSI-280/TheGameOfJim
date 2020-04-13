@@ -15,9 +15,9 @@ public:
 	//constructor and destructor
 	Armor() {
 		int level = Player::getPlayerLevel();
-		int level = Player::testPlayer.getPlayerLevel();
+		int level = testPlayer.getPlayerLevel();
 		if (level < 3) { level = 3; }
-		int Rand = random(level, level - 2)
+		int Rand = random(level, level - 2);
 		setLevel(Rand);
 		setDefense(Rand * 10);
 		Item::setName("Shirt");
@@ -29,7 +29,7 @@ public:
 		setLevel(level);
 		setDefense(defense);
 		Item::setName(name);
-		Item::setDescription(description);
+		setDescription(description);
 		Item::setType("Armor");
 	}
 
