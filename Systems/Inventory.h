@@ -17,6 +17,10 @@ public:
 	bool checkPlayerInventoryForItem(Item item);
 	int getIndexOfItem(Item item);
 	Item getItem(int index);
+	string getItemDesc(Item item)
+
+	void getPlayerInventory();
+	void swapInventorySpaces(Item item1, Item item2)
 
 	void removeItemFromPlayerInventory(Item item);
 	void addItemToPlayerInventory(Item item);

@@ -46,6 +46,62 @@ int getIndexOfItem(Item item)
 	return null;
 }
 
+string Inventory::getItemDesc(Item item)
+{
+	errorstring = "No such item is in your inventory"
+	for (int i = 0; i < PlayerInventory.size(); i++)
+	{
+		if (PlayerInventory[i] = item)
+		{
+			descrption = PlayerInventory[i].getDescription()
+			return description;
+		}
+	}
+	return errorstring;
+}
+
+void Inventory::getPlayerInventory()
+{
+	string inventory = ""
+	for (int i = 0; i < PlayerInventory.size(); i++)
+	{
+		//if end of inventory simply add last item
+		if (i == (PlayerInventory.size() - 1) {
+			inventory += PlayerInventory[i].getName()
+		}
+		//if not end of inventory add item name and comma for next item
+		else {
+			inventory += PlayerInventory[i].getName() + ", "
+		}
+	}
+	//print out string containing full inventory item names
+	cout << "Current Inventory: " << inventory << "."
+}
+
+//This is going on the assumption that these items are in fact in the inventory
+//but their indexes are unkown
+void Inventory::swapInventorySpaces(Item item1, Item item2) {
+	//temporary holder for item when switching
+	Item temp;
+	int index1;
+	int index2;
+	//for loop for finding item's index numbers 
+	for (int i = 0; i < PlayerInventory.size(); i++)
+	{
+		if (PlayerInventory[i] = item1)
+		{
+			index1 = i;
+		}
+		else if (PlayerInventory[i] = item2)
+		{
+			index2 = i;
+		}
+	}
+	temp = PlayerInventory[index1];
+	PlayerInventory[index1] = PlayerInventory[index2];
+	PlayerInventory[index2] = temp;
+}
+
 //Searches for the item that is attempting to be removed. If it is not there it does nothing
 //Otherwise the item is replaced with null
 void Inventory::removeItemFromPlayerInventory(Item item)

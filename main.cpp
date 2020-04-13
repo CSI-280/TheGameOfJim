@@ -14,20 +14,25 @@
 #include "Systems\Combat.h"
 #include "Systems\Rooms.h"
 #include "Branches/intro.h"
+#include "Branches/Example Branch/ExampleBranch.h"
 using namespace std;
 
 int main()
 {
 	cout << "InitialCode" << endl;
 
-	unordered_map<string, Room> RoomTable;
-	unordered_map<string, Link> LinkTable;
-	unordered_map<string, Container> ContainerTable;
-
-
+	unordered_map<string, Room*> RoomTable;
+	unordered_map<string, Link*> LinkTable;
+	unordered_map<string, Container*> ContainerTable;
 	Enemies testEnemy;
 	Player testPlayer;
-	intro(testPlayer);
+	Inventory playerInventory;
+
+	initBoringBranch(&RoomTable, &LinkTable, &ContainerTable, &playerInventory);
+
+	//intro(testPlayer);
+	playGame(LinkTable["Empty Link to Boring Shed"]);
+
 
 	// combat(testPlayer, testEnemy);
 
