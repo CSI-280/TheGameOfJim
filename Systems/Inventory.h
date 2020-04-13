@@ -5,8 +5,9 @@ using namespace std;
 
 class Inventory {
 private:
-
 	//Note the Item Class has not been created yet.
+	int PlayerInventorySize = 15;
+	int ActiveInventorySize = 4;
 	Item PlayerInventory[15]; //Default Inventory Size of 15
 	Item ActiveInventory[4]; // An array of the items the player has equipped [Weapon, HeadArmor, BodyArmor, LegArmor]
 
@@ -17,14 +18,15 @@ public:
 	bool checkPlayerInventoryForItem(Item item);
 	int getIndexOfItem(Item item);
 	Item getItem(int index);
-	string getItemDesc(Item item)
-
+	string getItemDesc(Item item);
 	void getPlayerInventory();
-	void swapInventorySpaces(Item item1, Item item2)
 
+	void swapInventorySpaces(Item item1, Item item2);
 	void removeItemFromPlayerInventory(Item item);
 	void addItemToPlayerInventory(Item item);
 
 	int getPlayerInventorySize();
 	int getActiveInventorySize();
+
+	void swapIntoActiveInventory(int activeIndex, int playerIndex);
 };
