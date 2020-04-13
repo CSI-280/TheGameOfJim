@@ -9,27 +9,41 @@
 #include "Consumables.h"
 #include "Armor.h"
 #include "questItem.h"
-
+#include "Rand-Num.cpp"
+#include "Player.h"
+#include "TheGameOfJim/main.cpp"
 using namespace std;
 
-//NOT YET IMPLEMENTED
+
 class Item 
 {
 private:
 	//String that dictates the type of item
 	//Example Types - "HeadArmor", "BodyArmor", "LegArmor", "Weapon", "Key"
-	string mName, mDescription, itemType;
+	string mName, mDescription, mItemType;
 public:
 	void setName(string name) { mName = name; }
 	void setDescription(string description) { mDescription = description; }
+	void setType(string type) { mItemType = type; }
 
 	string getDescription() { return mDescription; }
 	string getName() { return mName; }
 	string getType() { return itemType; };
 
 	Item() {
-		setName("Common Key");
-		setDescription("This may be able to open a box.")
+		//Random Item from any category
+		int Rand = random(3);
+		if (Rand == 3) {
+			Armor();
+		}
+		else if (Rand == 2) {
+			Weapons();
+		}
+		else {
+			Consumables();
+		}
+
+
 	}
 
 	Item(string name, string description) {

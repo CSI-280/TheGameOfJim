@@ -14,17 +14,22 @@ class Weapons : public Item
 public:
 	//constructor and destructor
 	Weapons() {
-		setLevel(1);
-		setAttack(100);
-		setName("Rusty Sword");
-		setDescription("Sword covered in rust. \nIt's probably been sitting there for a long time.");
+		int level = Player::getPlayerLevel();//This may need to be changed for it to properly scale
+		if (level < 3) { level = 3; }
+		int Rand = random(level, level - 2)
+		setLevel(Rand);
+		setAttack(Rand * 100);
+		Item::setName("Rusty Sword");
+		Item::setDescription("Sword covered in rust. \nIt's probably been sitting there for a long time.");
+		Item::setType("Weapon");
 	}
 
 	Weapons(int level, int attack, string name, string description) {
 		setLevel(level);
 		setAttack(attack);
-		setName(name);
-		setDescription(description);
+		Item::setName(name);
+		Item::setDescription(description);
+		Item::setType("Weapon");
 	}
 
 	~Weapons();
