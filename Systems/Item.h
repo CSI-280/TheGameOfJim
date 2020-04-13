@@ -11,7 +11,7 @@
 #include "questItem.h"
 #include "Rand-Num.cpp"
 #include "Player.h"
-#include "TheGameOfJim/main.cpp"
+#include "main.cpp"
 using namespace std;
 
 
@@ -28,7 +28,7 @@ public:
 
 	string getDescription() { return mDescription; }
 	string getName() { return mName; }
-	string getType() { return itemType; };
+	string getType() { return mItemType; };
 
 	Item() {
 		//Random Item from any category
