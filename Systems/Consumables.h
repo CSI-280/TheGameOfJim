@@ -13,17 +13,22 @@ class Consumables : public Item
 {
 	//constructor and destructor
 	Consumables() {
-		setLevel(1);
-		setHealing(10);
-		setName("Half Eaten Cookie");
-		setDescription("Saved it for later!");
+		int level = Player::getPlayerLevel();
+		if (level < 3) { level = 3; }
+		int Rand = random(level, level - 2)
+		setLevel(Rand);
+		setHealing(Rand * 25);
+		Item::setName("Half Eaten Cookie");
+		Item::setDescription("Saved it for later!");
+		Item::setType("Consumable");
 	}
 
 	Consumables(int level, int healing, string name, string description) {
 		setLevel(level);
 		setHealing(healing);
-		setName(name);
-		setDescription(description);
+		Item::setName(name);
+		Item::setDescription(description);
+		Item::setType("Consumable");
 	}
 
 	~Consumables();
