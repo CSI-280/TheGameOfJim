@@ -27,6 +27,7 @@ Link::Link(string cName, Container* cContainer)
 	mType = true;
 	mContainer = cContainer;
 	mRoom = nullptr;
+	mDoor = nullptr;
 }
 
 Link::Link(string cName, Room* cRoom)
@@ -35,6 +36,16 @@ Link::Link(string cName, Room* cRoom)
 	mType = false;
 	mContainer = nullptr;
 	mRoom = cRoom;
+	mDoor = nullptr;
+}
+
+Link::Link(string cName, Door* Door)
+{
+	mName = cName;
+	mType = false;
+	mContainer = nullptr;
+	mRoom = nullptr;
+	mDoor = cDoor
 }
 
 string Link::getName()
@@ -239,6 +250,82 @@ void Room::printAll(bool printName)
 }
 
 Link* Room::executeRoom()
+{
+	int choice;
+	bool input = true;
+	printAll();
+	do
+	{
+		cout << "What will you do? (Please input a number.)" << endl;
+		cin >> choice;
+		cout << endl;
+
+		if (choice < mLinks.size())
+		{
+			input = true;
+			if ((*mLinks[choice]).checkConditions())
+			{
+				return &(*mLinks[choice]);
+			}
+			else
+			{
+				cout << "You can't do that!" << endl;
+				input = false;
+			}
+		}
+		else
+		{
+			input = false;
+		}
+	} while (!input);
+	return nullptr;
+}
+
+Door::Door(string cName)
+{
+	mName = cName;
+}
+
+string Door::getName()
+{
+	return mName;
+}
+
+void Door::addLink(Link* cLink)
+{
+	mLinks.push_back(cLink);
+}
+
+void Door::addDoorDescription(vector<string> cDescription)
+{
+	mRoomDescription = cDescription;
+}
+
+void Room::addLinkDescription(vector<string> cDescription)
+{
+	mLinkDescription = cDescription;
+}
+
+void Door::printAll(bool printName)
+{
+	int i;
+	if (printName)
+	{
+		cout << mName << endl;
+		cout << endl;
+	}
+	for (i = 0; i < mDoorDescription.size(); i++)
+	{
+		cout << mDoorDescription[i] << endl;
+	}
+	cout << endl;
+	for (i = 0; i < mLinkDescription.size(); i++)
+	{
+		cout << i << ") " << mLinkDescription[i] << endl;
+	}
+}
+
+Link* Door::executeRoom()
 {
 	int choice;
 	bool input = true;
