@@ -49,7 +49,9 @@ int Player::getPlayerSpeed() { return mSpeed; }
 
 int Player::getPlayerExp() { return mExp; }
 
-int Player::getPlayerExpNeeded() { return mExpNeeded;}
+int Player::getPlayerExpNeeded() { return mExpNeeded; }
+
+int Player::getPlayerLevel() { return mLevel; }
 
 void Player::setPlayerName(string name) { mName = name; }
 
@@ -80,7 +82,8 @@ void Player::setPlayerHealth(int health) {
 	mHealth = health;
 
 	if (mHealth <= 0) {
-		gameOver();
+		cout << "This should do something in the future, right now it just causes unresolved external errors." << endl;
+		//gameOver();
 	}
 
 }
@@ -94,10 +97,11 @@ void Player::setPlayerSpeed(int speed) { mSpeed = speed; }
 
 void Player::setPlayerExp(int exp) { mExp = exp; }
 
-void Player::setPlayerExpNeeded(int expNeeded) {mExpNeeded = expNeeded}
+void Player::setPlayerExpNeeded(int expNeeded) { mExpNeeded = expNeeded; }
 
 
-void calcPlayerExp(int expAwarded)
+
+void Player::calcPlayerExp(int expAwarded)
 {
 	mExp += expAwarded;
 	mExpNeeded -= expAwarded;

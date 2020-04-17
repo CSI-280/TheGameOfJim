@@ -23,27 +23,33 @@ bool combat(Player thePlayer, Enemies theEnemy, Inventory playerInventory)
 
 	// Apply the player's inventory items to their stats. 
 	// Since indexes 0 - 3 are the weapons and armor, they will be the only ones that are applied.
-	/*
+
 	for (int i = 0; i < 4; i++)
 	{
 		if (i == 0) //The weapon slot (0)
 		{
-			Weapons theWeapon = playerInventory.getItem(i); //Grab the item in the weapon slot
+			Item theWeapon = playerInventory.getItem(i); //Grab the item in the weapon slot
 			attack += theWeapon.getAttack(); //Add the weapon's attack stat to the player's base attack
 		}
 		else //The armor slots (1 - 3)
 		{
-			Armor theArmor = playerInventory.getItem(i); //Grab the item in the armor slots
+			Item theArmor = playerInventory.getItem(i); //Grab the item in the armor slots
 			defense += theArmor.getDefense(); //Add the armor's defense stat to the player's base defense
 		}
 			
 	}
-	*/
+
 
 	bool encounterActive = true;
 	bool death = false;
 	bool consumed = false;
 	int choice;
+
+	//status effects
+	bool isBurned = false;
+	bool isPoisoned = false;
+	bool isAsleep = false;
+	bool isParalyzed = false;
 
 	while (encounterActive == true)
 	{
@@ -200,6 +206,62 @@ bool damageCalc(int& health, int defense, int speed, int attack, int& enemyHealt
 	}
 
 	return encounterActive;
+}
+
+
+//not sure how to implement turn durations? for example, burn and poison could last 3 turns and then it would go away. 
+void statusBurn(int& health, string name) //takes 10% off of player's current health
+{
+	int burnDamage = health * 0.1;
+	health -= burnDamage;
+
+	cout << name << " is burned!\n" << burnDamage << " damage is taken.\n" << health << " HP remains.\n";
+}
+
+bool statusParalysis(int& speed, string name)
+{
+	bool canMove = true;
+	int speedDeduct = speed - 2;
+	if (random(10) == 5) //random chance to be completely paralyzed for a turn
+	{
+		canMove = false;
+		cout << name << " is paralyzed and unable to move!\n";
+		
+		return canMove;
+	}
+
+	cout << name << " is paralyzed! Speed has been reduced.\n";
+
+	return canMove;
+}
+
+bool statusSleep(string name)
+{
+	bool awake = false;
+	if (random(10) == 3 || random(10) == 5) //random chance to wake up again, won't wake up otherwise
+	{
+		bool awake = true;
+		cout << name << " is no longer alseep!\n";
+		return awake;
+	}
+	cout << name << " is fast alseep!\n";
+	return awake;
+}
+
+void statusPoison(int& health, string name)
+{
+	int poisonDamage = health * 0.2;
+	health -= poisonDamage;
+
+	cout << name << " is poisoned!\n" << poisonDamage << " damage is taken.\n" << health << " HP remains.\n";
+
+	if (random(10) == 9)
+	{
+		poisonDamage = health * 0.3; //crit poison
+		health -= poisonDamage;
+
+		cout << name << " has been severely poisoned!\n" << poisonDamage << " damage is taken.\n" << health << " HP remains.\n";
+	}
 }
 
 

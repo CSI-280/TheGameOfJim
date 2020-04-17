@@ -2,7 +2,8 @@
 
 #include "Rooms.h"
 
-void loadBranchExample(unordered_map<string, Room> Rooms, unordered_map<string, Link> Links, unordered_map<string, Container> Container)
+/*
+void loadBranchExample(unordered_map<string, Room*> Rooms, unordered_map<string, Link*> Links, unordered_map<string, Container*> Containers)
 {
 	Room dummyRoom("DummyRoom");
 	Rooms.insert(pair<string,Room>(dummyRoom.getName(), dummyRoom));
@@ -10,6 +11,7 @@ void loadBranchExample(unordered_map<string, Room> Rooms, unordered_map<string, 
 	//Links.insert(pair<string, Link>(dummyLink.getName(), dummyLink));
 	//Rooms["DummyRoom"].addLink(Links["DummyLink"])
 }
+*/
 
 void playGame(Link* cLink) 
 {
@@ -64,6 +66,11 @@ Container::Container(string cName, Inventory* cTrackedInventory, bool cStorage, 
 string Container::getName()
 {
 	return mName;
+}
+
+void Container::addItems(Item* cItem)
+{
+	mItems.push_back(cItem);
 }
 
 void Container::addLink(Link* cLink)
@@ -150,14 +157,14 @@ Link* Container::executeContainer()
 			cout << "0) Take Nothing." << endl;
 			for (i = 1; i <= mItems.size(); i++)
 			{
-				cout << i << ") " << mItems[i - 1].name << endl;
+				cout << i << ") " << (*mItems[i - 1]).getName() << endl;
 			}
 			cout << "Which will you take? (Please input a number.)" << endl;
 			cin >> choice2;
 			cout << endl;
 			if (choice2 > 0 && choice2 <= mItems.size())
 			{
-				(*mTrackedInventory).addItemToPlayerInventory(mItems[choice2 - 1]);
+				(*mTrackedInventory).addItemToPlayerInventory((*mItems[choice2 - 1]));
 				mItems.erase(mItems.begin() + (choice2 - 1));
 			}
 		}
@@ -167,16 +174,16 @@ Link* Container::executeContainer()
 			cout << "0) Store Nothing." << endl;
 			for (i = 1; i <= (*mTrackedInventory).getPlayerInventorySize(); i++)
 			{
-				cout << i << ") " << (*mTrackedInventory).getItem(i - 1).name << endl;
+				cout << i << ") " << (*mTrackedInventory).getItem(i - 1).getName() << endl;
 			}
 			cout << "Which will you Store? (Please input a number.)" << endl;
 			cin >> choice2;
 			cout << endl;
 			if (choice2 > 0 && choice2 <= (*mTrackedInventory).getPlayerInventorySize())
 			{
-				Item subject = (*mTrackedInventory).getItem(i - 1);
+				Item* subject = (&(*mTrackedInventory).getItem(i - 1));
 				mItems.push_back(subject);
-				(*mTrackedInventory).removeItemFromPlayerInventory(subject);
+				(*mTrackedInventory).removeItemFromPlayerInventory(*subject);
 			}
 		}
 		else

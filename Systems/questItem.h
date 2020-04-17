@@ -8,7 +8,7 @@
 #include "Item.h"
 
 using namespace std;
-
+/*
 class questItems : public Item
 {
 public:
@@ -16,7 +16,7 @@ public:
 	questItems() {
 		setName("Broken Key");
 		setDescription("I doesn't seem to work on anything");
-		setUse("N/A")
+		setUse("N/A");
 	}
 	questItems(string use, string description, string name) {
 		setName(name);
@@ -34,3 +34,4 @@ private:
 	//each item we implement can have a password that makes it unique to a specific door.
 	string mUse;
 };
+*/

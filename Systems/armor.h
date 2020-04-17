@@ -6,7 +6,7 @@
 #include <cstdlib>
 #include <iomanip>
 #include "Item.h"
-
+/*
 using namespace std;
 
 class Armor : public Item
@@ -14,17 +14,23 @@ class Armor : public Item
 public:
 	//constructor and destructor
 	Armor() {
-		setLevel(1);
-		setDefense(10);
-		setName("Shirt");
-		setDescription("Just an ordinary shirt.");
+		int level = Player::getPlayerLevel();
+		int level = testPlayer.getPlayerLevel();
+		if (level < 3) { level = 3; }
+		int Rand = random(level, level - 2);
+		setLevel(Rand);
+		setDefense(Rand * 10);
+		Item::setName("Shirt");
+		Item::setDescription("Just an ordinary shirt.");
+		Item::setType("Armor");
 	}
 
 	Armor(int level, int defense, string name, string description) {
 		setLevel(level);
 		setDefense(defense);
-		setName(name);
+		Item::setName(name);
 		setDescription(description);
+		Item::setType("Armor");
 	}
 
 	~Armor();
@@ -39,3 +45,4 @@ public:
 private:
 	int mLevel, mDefense;
 };
+*/
