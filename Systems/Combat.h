@@ -9,6 +9,6 @@
 
 using namespace std;
 
-bool combat(Player, Enemies, Inventory);
-bool damageCalc(int&, int, int, int, int&, int, int, int, string, string, bool, bool&);
+bool combat(Player thePlayer, Enemies theEnemy, Inventory playerInventory);
+bool damageCalc(int& health, int defense, int speed, int attack, int& enemyHealth, int enemyDefense, int enemySpeed, int enemyAttack, string name, string enemyName, bool encounterActive, bool& death);
 // void useConsumable(Player, int&, Inventory);

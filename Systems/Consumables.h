@@ -6,7 +6,6 @@
 #include <cstdlib>
 #include <iomanip>
 #include "Item.h"
-#include "main.cpp"
 using namespace std;
 /*
 class Consumables : public Item

@@ -15,18 +15,20 @@ void loadBranchExample(unordered_map<string, Room*> Rooms, unordered_map<string,
 
 void deleteall(unordered_map<string, Room*>* Rooms, unordered_map<string, Link*>* Links, unordered_map<string, Container*>* Containers)
 {
-	int i;
-	for (i = (*Rooms).size() - 1; i < 0; i--)
+	unordered_map<string, Room*> ::iterator i;
+	unordered_map<string, Container*> ::iterator j;
+	unordered_map<string, Link*> ::iterator k;
+	for (i = (*Rooms).begin(); i != (*Rooms).end(); i++)
 	{
-		delete (*Rooms).cbegin + i;
+		delete (i->second);
 	}
-	for (i = (*Containers).size() - 1; i < 0; i--)
+	for (j = (*Containers).begin(); j != (*Containers).end(); j++)
 	{
-		delete (*Rooms).cbegin + i;
+		delete (j->second);
 	}
-	for (i = (*Containers).size() - 1; i < 0; i--)
+	for (k = (*Links).begin(); k != (*Links).end(); k++)
 	{
-		delete (*Rooms).cbegin + i;
+		delete (k->second);
 	}
 }
 
