@@ -157,7 +157,7 @@ Link* Container::executeContainer()
 			cout << "0) Take Nothing." << endl;
 			for (i = 1; i <= mItems.size(); i++)
 			{
-				cout << i << ") " << (*mItems[i - 1]).name << endl;
+				cout << i << ") " << (*mItems[i - 1]).getName() << endl;
 			}
 			cout << "Which will you take? (Please input a number.)" << endl;
 			cin >> choice2;
@@ -174,7 +174,7 @@ Link* Container::executeContainer()
 			cout << "0) Store Nothing." << endl;
 			for (i = 1; i <= (*mTrackedInventory).getPlayerInventorySize(); i++)
 			{
-				cout << i << ") " << (*mTrackedInventory).getItem(i - 1).name << endl;
+				cout << i << ") " << (*mTrackedInventory).getItem(i - 1).getName() << endl;
 			}
 			cout << "Which will you Store? (Please input a number.)" << endl;
 			cin >> choice2;

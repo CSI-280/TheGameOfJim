@@ -8,7 +8,7 @@
 #include "Item.h"
 
 using namespace std;
-
+/*
 class questItems : public Item
 {
 public:
@@ -34,3 +34,4 @@ private:
 	//each item we implement can have a password that makes it unique to a specific door.
 	string mUse;
 };
+*/
