@@ -42,6 +42,15 @@ public:
 	}
 };
 
+class MoveToAnotherRoom : public Link
+{
+public:
+	bool checkConditions()
+	{
+		return true;
+	}
+};
+
 void initSpaceShip(unordered_map<string, Room*>* Rooms, unordered_map<string, Link*>* Links, unordered_map<string, Container*>* Containers, Inventory* Inventory)
 {
 	//Initalize Data
