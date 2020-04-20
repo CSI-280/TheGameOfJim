@@ -12,6 +12,7 @@
 #include <unordered_map>
 #include "Item.h"
 #include "Inventory.h"
+#include "Rand-Num.h"
 
 class Container;
 class Room;

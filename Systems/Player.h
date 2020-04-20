@@ -10,7 +10,7 @@ private:
 	string mName, mGender, mPronoun1, mPronoun2, mPronoun3;
 public:
 	Player();
-	Player(string, int, int, int, int, int, int);
+	Player(string, string, int, int, int, int, int, int);
 
 	~Player();
 
@@ -34,8 +34,9 @@ public:
 	void setPlayerAttack(int);
 	void setPlayerDefense(int);
 	void setPlayerSpeed(int);
-	void setPlayerExp();
-	void setPlayerExpNeeded();
+	void setPlayerExp(int);
+	void setPlayerExpNeeded(int);
+	void calcPlayerExp(int);
 
-	void LevelUp();
+	void levelUp();
 };

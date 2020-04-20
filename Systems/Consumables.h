@@ -8,7 +8,7 @@
 #include "Item.h"
 #include "main.cpp"
 using namespace std;
-
+/*
 class Consumables : public Item
 {
 public:
@@ -44,3 +44,4 @@ public:
 private:
 	int mLevel, mHealing;
 };
+*/

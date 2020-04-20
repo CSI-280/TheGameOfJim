@@ -23,22 +23,22 @@ bool combat(Player thePlayer, Enemies theEnemy, Inventory playerInventory)
 
 	// Apply the player's inventory items to their stats. 
 	// Since indexes 0 - 3 are the weapons and armor, they will be the only ones that are applied.
-	/*
+
 	for (int i = 0; i < 4; i++)
 	{
 		if (i == 0) //The weapon slot (0)
 		{
-			Weapons theWeapon = playerInventory.getItem(i); //Grab the item in the weapon slot
+			Item theWeapon = playerInventory.getItem(i); //Grab the item in the weapon slot
 			attack += theWeapon.getAttack(); //Add the weapon's attack stat to the player's base attack
 		}
 		else //The armor slots (1 - 3)
 		{
-			Armor theArmor = playerInventory.getItem(i); //Grab the item in the armor slots
+			Item theArmor = playerInventory.getItem(i); //Grab the item in the armor slots
 			defense += theArmor.getDefense(); //Add the armor's defense stat to the player's base defense
 		}
 			
 	}
-	*/
+
 
 	bool encounterActive = true;
 	bool death = false;
@@ -215,7 +215,7 @@ void statusBurn(int& health, string name) //takes 10% off of player's current he
 	int burnDamage = health * 0.1;
 	health -= burnDamage;
 
-	cout << name " is burned!\n" << burnDamage << " damage is taken.\n" << health << " HP remains.\n";
+	cout << name << " is burned!\n" << burnDamage << " damage is taken.\n" << health << " HP remains.\n";
 }
 
 bool statusParalysis(int& speed, string name)
@@ -242,8 +242,10 @@ bool statusSleep(string name)
 	{
 		bool awake = true;
 		cout << name << " is no longer alseep!\n";
+		return awake;
 	}
 	cout << name << " is fast alseep!\n";
+	return awake;
 }
 
 void statusPoison(int& health, string name)
@@ -256,7 +258,7 @@ void statusPoison(int& health, string name)
 	if (random(10) == 9)
 	{
 		poisonDamage = health * 0.3; //crit poison
-		health -= poisonDamage
+		health -= poisonDamage;
 
 		cout << name << " has been severely poisoned!\n" << poisonDamage << " damage is taken.\n" << health << " HP remains.\n";
 	}

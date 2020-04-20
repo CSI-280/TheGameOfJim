@@ -7,7 +7,7 @@
 #include <iomanip>
 #include "Item.h"
 
-
+/*
 using namespace std;
 
 class Weapons : public Item
@@ -45,3 +45,4 @@ public:
 private:
 	int mLevel, mAttack;
 };
+*/

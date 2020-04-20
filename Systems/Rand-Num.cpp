@@ -1,11 +1,13 @@
 #include <iostream>
 #include <ctime>
+#include "Rand-Num.h"
 using namespace std;
 
 /* Multi is optional for if we want to have any system that multiplies the RNG, 
 like say by player/enemy level or the something else. it and its options can be dropped 
 if we decide we don't want to do that that.*/
-int random(int max, int min = 1, int multi = 0)
+
+int random(int max, int min, int multi)
 {
 	//If no minimum is given default to 1 for range
 	if (min == 1) {
@@ -36,6 +38,7 @@ int random(int max, int min = 1, int multi = 0)
 	}
 	
 }
+
 
 /*Test to see how each stage works
 
