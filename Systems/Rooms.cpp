@@ -13,6 +13,23 @@ void loadBranchExample(unordered_map<string, Room*> Rooms, unordered_map<string,
 }
 */
 
+void deleteall(unordered_map<string, Room*>* Rooms, unordered_map<string, Link*>* Links, unordered_map<string, Container*>* Containers)
+{
+	int i;
+	for (i = (*Rooms).size() - 1; i < 0; i--)
+	{
+		delete (*Rooms).cbegin + i;
+	}
+	for (i = (*Containers).size() - 1; i < 0; i--)
+	{
+		delete (*Rooms).cbegin + i;
+	}
+	for (i = (*Containers).size() - 1; i < 0; i--)
+	{
+		delete (*Rooms).cbegin + i;
+	}
+}
+
 void playGame(Link* cLink) 
 {
 	while (cLink != nullptr)
