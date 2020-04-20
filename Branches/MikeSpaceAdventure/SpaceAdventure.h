@@ -113,3 +113,107 @@ void initSpaceShip(unordered_map<string, Room*>* Rooms, unordered_map<string, Li
 	(*(*Rooms)["Tovic"]).addLinkDescription(RoomDescription);
 }
 
+void initKathor(unordered_map<string, Room*>* Rooms, unordered_map<string, Link*>* Links, unordered_map<string, Container*>* Containers, Inventory* Inventory)
+{
+	//Initalize Data
+	Room* spaceShip = new Room("Space Ship");
+	Room* kathor = new Room("Kathor");
+	Room* kathorVillage = new Room("Kathor Village")
+
+	EmptyLinkToRoom* elToSpaceShip = new EmptyLinkToRoom("Empty Link to Space Ship", spaceShip);
+	EmptyLinkToRoom* elToKathor = new EmptyLinkToRoom("Empty Link to Kathor", kathor);
+	EmptyLinkToRoom* elToKathorVillage = new EmptyLinkToRoom("Empty Link to Kathor Village", kathorVillage);
+
+	//Store Data in Maps
+	(*Rooms).insert(pair<string, Room*>((*spaceShip).getName(), spaceShip));
+	(*Rooms).insert(pair<string, Room*>((*kathor).getName(), kathor));
+	(*Rooms).insert(pair<string, Room*>((*kathorVillage).getName(), kathorVillage));
+
+	(*Links).insert(pair<string, Link*>((*elToSpaceShip).getName(), elToSpaceShip));
+	(*Links).insert(pair<string, Link*>((*elToKathor).getName(), elToKathor));
+	(*Links).insert(pair<string, Link*>((*elToKathorVillage).getName(), elToKathorVillage));
+
+
+	//Connect Rooms with Links
+	(*(*Rooms)["Space Ship"]).addLink((*Links)["Empty Link to Kathor"]);
+	(*(*Rooms)["Kathor"]).addLink((*Links)["Empty Link to Space Ship"]);
+	(*(*Rooms)["Kathor"]).addLink((*Links)["Empty Link to Kathor Village"]);
+	(*(*Rooms)["Kathor Village"]).addLink((*Links)["Empty Link to Kathor"]);
+
+
+	//Detailing
+	vector<string> RoomDescription;
+	RoomDescription.push_back("You get off your space ship and land in Kathor.");
+	RoomDescription.push_back("You look off into the distance and see a grand mountain surrounded by valleys.")
+	RoomDescription.push_back("A river is right next to your space ship.")
+	RoomDescription.push_back("Across from the river you see smoke, probably coming from a village.")
+	(*(*Rooms)["Kathor"]).addRoomDescription(RoomDescription);
+	RoomDescription.clear();
+	RoomDescription.push_back("Inspect Space Ship")
+	RoomDescription.push_back("Inspect Smoke")
+	(*(*Rooms)["Kathor"]).addLinkDescription(RoomDescription);
+	RoomDescription.clear();
+	RoomDescription.push_back("Your space ship is gleaming in the sun.")
+	(*(*Rooms)["Space Ship"]).addRoomDescription(RoomDescription);
+	RoomDescription.clear();
+	RoomDescription.push_back("Stop looking at space ship.")
+	(*(*Rooms)["Space Ship"]).addLinkDescription(RoomDescription);
+	RoomDescription.clear();
+	RoomDescription.push_back("Towards the smoke, you see a way to cross the river.")
+	(*(*Rooms)["Kathor Village"]).addRoomDescription(RoomDescription);
+	RoomDescription.clear();
+	RoomDescription.push_back("Go towards the smoke.")
+	RoomDescription.push_back("Stop looking at the smoke.")
+	(*(*Rooms)["Kathor Village"]).addLinkDescription(RoomDescription);
+
+	void initTovic(unordered_map<string, Room*>* Rooms, unordered_map<string, Link*>* Links, unordered_map<string, Container*>* Containers, Inventory* Inventory)
+	{
+		//Initalize Data
+		Room* spaceShip = new Room("Space Ship");
+		Room* tovic = new Room("Tovic");
+		Room* tovicGunFight = new Room("Tovic Gun Fight")
+
+		EmptyLinkToRoom* elToSpaceShip = new EmptyLinkToRoom("Empty Link to Space Ship", spaceShip);
+		EmptyLinkToRoom* elToTovic = new EmptyLinkToRoom("Empty Link to Tovic", tovic);
+		EmptyLinkToRoom* elToTovicGunFight = new EmptyLinkToRoom("Empty Link to Tovic Gun Fight", tovicGunFight);
+
+		//Store Data in Maps
+		(*Rooms).insert(pair<string, Room*>((*spaceShip).getName(), spaceShip));
+		(*Rooms).insert(pair<string, Room*>((*tovic).getName(), tovic));
+		(*Rooms).insert(pair<string, Room*>((*tovicGunFight).getName(), tovicGunFight));
+
+		(*Links).insert(pair<string, Link*>((*elToSpaceShip).getName(), elToSpaceShip));
+		(*Links).insert(pair<string, Link*>((*elToTovic).getName(), elToTovic));
+		(*Links).insert(pair<string, Link*>((*elToTovicGunFight).getName(), elToTovicGunFight));
+
+
+		//Connect Rooms with Links
+		(*(*Rooms)["Space Ship"]).addLink((*Links)["Empty Link to Tovic"]);
+		(*(*Rooms)["Tovic"]).addLink((*Links)["Empty Link to Space Ship"]);
+		(*(*Rooms)["Tovic"]).addLink((*Links)["Empty Link to Toviv Gun Fight"]);
+		(*(*Rooms)["Tovic Gun Fight"]).addLink((*Links)["Empty Link to Tovic"]);
+
+
+		//Detailing
+		vector<string> RoomDescription;
+		RoomDescription.push_back("You get off your space ship and land in Tovic.");
+		RoomDescription.push_back("You see sand only sand...")
+		RoomDescription.push_back("A loud bang comes from the distance, gun shots.")
+		(*(*Rooms)["Tovic"]).addRoomDescription(RoomDescription);
+		RoomDescription.clear();
+		RoomDescription.push_back("Inspect Space Ship")
+		RoomDescription.push_back("Inspect gun shots")
+		(*(*Rooms)["Tovic"]).addLinkDescription(RoomDescription);
+		RoomDescription.clear();
+		RoomDescription.push_back("Your space ship is covered in the sand.")
+		(*(*Rooms)["Space Ship"]).addRoomDescription(RoomDescription);
+		RoomDescription.clear();
+		RoomDescription.push_back("Stop looking at space ship.")
+		(*(*Rooms)["Space Ship"]).addLinkDescription(RoomDescription);
+		RoomDescription.clear();
+		RoomDescription.push_back("Looking closing in the direction of the shots you see two groups fighting.")
+		(*(*Rooms)["Tovic Gun Fight"]).addRoomDescription(RoomDescription);
+		RoomDescription.clear();
+		RoomDescription.push_back("Go towards the gun shots.")
+		RoomDescription.push_back("Stop looking at the gun shots.")
+		(*(*Rooms)["Tovic Gun Fight"]).addLinkDescription(RoomDescription);
