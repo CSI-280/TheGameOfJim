@@ -13,6 +13,23 @@ void loadBranchExample(unordered_map<string, Room*> Rooms, unordered_map<string,
 }
 */
 
+void deleteall(unordered_map<string, Room*>* Rooms, unordered_map<string, Link*>* Links, unordered_map<string, Container*>* Containers)
+{
+	int i;
+	for (i = (*Rooms).size() - 1; i < 0; i--)
+	{
+		delete (*Rooms).cbegin + i;
+	}
+	for (i = (*Containers).size() - 1; i < 0; i--)
+	{
+		delete (*Rooms).cbegin + i;
+	}
+	for (i = (*Containers).size() - 1; i < 0; i--)
+	{
+		delete (*Rooms).cbegin + i;
+	}
+}
+
 void playGame(Link* cLink) 
 {
 	while (cLink != nullptr)
@@ -157,7 +174,7 @@ Link* Container::executeContainer()
 			cout << "0) Take Nothing." << endl;
 			for (i = 1; i <= mItems.size(); i++)
 			{
-				cout << i << ") " << (*mItems[i - 1]).name << endl;
+				cout << i << ") " << (*mItems[i - 1]).getName() << endl;
 			}
 			cout << "Which will you take? (Please input a number.)" << endl;
 			cin >> choice2;
@@ -174,7 +191,7 @@ Link* Container::executeContainer()
 			cout << "0) Store Nothing." << endl;
 			for (i = 1; i <= (*mTrackedInventory).getPlayerInventorySize(); i++)
 			{
-				cout << i << ") " << (*mTrackedInventory).getItem(i - 1).name << endl;
+				cout << i << ") " << (*mTrackedInventory).getItem(i - 1).getName() << endl;
 			}
 			cout << "Which will you Store? (Please input a number.)" << endl;
 			cin >> choice2;

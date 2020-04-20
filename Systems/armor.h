@@ -6,7 +6,7 @@
 #include <cstdlib>
 #include <iomanip>
 #include "Item.h"
-
+/*
 using namespace std;
 
 class Armor : public Item
@@ -45,3 +45,4 @@ public:
 private:
 	int mLevel, mDefense;
 };
+*/

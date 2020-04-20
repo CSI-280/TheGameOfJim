@@ -6,7 +6,11 @@ using namespace std;
 
 Inventory::Inventory() //Empty For Now - In Future player could have starting items.
 {
+	Item defaultItem;
 
+	for (int i = 0; i <= 14; i++)
+		PlayerInventory[i] = defaultItem; // This sets all slots to be empty, all having a name of default
+										  // This is required for the current addItemToPlayerInventory code
 }
 
 Inventory::~Inventory() 
@@ -126,6 +130,7 @@ void Inventory::addItemToPlayerInventory(Item item)
 		if (PlayerInventory[i].getName() == "Default")
 		{
 			PlayerInventory[i] = item;
+			break;
 		}
 	}
 }
