@@ -20,7 +20,8 @@ private:
 	//String that dictates the type of item
 	//Example Types - "HeadArmor", "BodyArmor", "LegArmor", "Weapon", "Key"
 	string mName, mDescription, mItemType;
-	int mAttack, mDefense, mHealing, mLevel;
+	int mAttack, mDefense, mHealing, mLevel, Rand;
+	bool randType = true;
 public:
 
 	void setName(string name) { mName = name; }
@@ -34,7 +35,10 @@ public:
 	void generateRandomItem(int playerLevel) 
 	{
 		//Random Item from any category
+		if (randType = true) {
 		int Rand = random(3);
+		}
+
 		if (Rand == 3) {
 			if (playerLevel < 3) { playerLevel = 3; }
 			int Rand2 = random(playerLevel, playerLevel - 2);
@@ -73,15 +77,25 @@ public:
 	int getHealing() { return mHealing; }
 	int getLevel() { return mLevel; }
 
-	Item() {
-		//Default to be overwritten, or potentially as placeholders in inventory
-		setName("Default");
-		setDescription("Empty Slot");
-		setType("Default");
-		setAttack(0);
-		setDefense(0);
-		setHealing(0);
-		setLevel(0);
+	//generates a random item but it has 
+	Item(int playerLevel) {
+		generateRandomItem(playerLevel);
+	}
+
+	Item(int playerLevel, string Type) {
+		randType = false;
+		if (Type == "Weapon") {
+			Rand = 2;
+		}
+
+		else if (Type == "Armor") {
+			Rand = 3;
+		}
+
+		else {
+			Rand = 1;
+		}
+		generateRandomItem(playerLevel);
 	}
 
 	Item(string name, string description, string type, int attack, int defense, int healing, int level) {
