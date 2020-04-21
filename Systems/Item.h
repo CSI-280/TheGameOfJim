@@ -27,6 +27,7 @@ public:
 	void setName(string name) { mName = name; }
 	void setDescription(string description) { mDescription = description; }
 	void setType(string type) { mItemType = type; }
+
 	void setAttack(int attack) { mAttack = attack; }
 	void setDefense(int defense) { mDefense = defense; }
 	void setHealing(int healing) { mHealing = healing; }

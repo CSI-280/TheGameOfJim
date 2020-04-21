@@ -116,7 +116,7 @@ void Inventory::removeItemFromPlayerInventory(Item item)
 	{
 		if (PlayerInventory[i].getName() == item.getName())
 		{
-			Item newItem;
+			Item newItem = new Item();
 			PlayerInventory[i] = newItem;
 		}
 	}

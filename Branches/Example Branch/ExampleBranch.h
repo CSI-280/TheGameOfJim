@@ -73,8 +73,8 @@ public:
 void initBoringBranch(unordered_map<string, Room*>* Rooms, unordered_map<string, Link*>* Links, unordered_map<string, Container*>* Containers, Inventory* Inventory)
 {
 	//Initalize Data
-	(*BlandKey).setName("Bland Key");
-	(*HealthPotion).setName("Health Potion");
+	(*BlandKey).name = "Bland Key";
+	(*HealthPotion).name = "Health Potion";
 	Room* boringShed = new Room("Boring Shed");
 	Container* boringCrate = new Container("Boring Crate", Inventory, false, true);
 	Container* boringChest = new Container("Boring Chest", Inventory, false, true);
