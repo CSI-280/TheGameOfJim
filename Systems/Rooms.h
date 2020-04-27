@@ -16,6 +16,7 @@
 
 class Container;
 class Room;
+class Link;
 
 void deleteall(unordered_map<string, Room*>* Rooms, unordered_map<string, Link*>* Links, unordered_map<string, Container*>* Containers);
 
