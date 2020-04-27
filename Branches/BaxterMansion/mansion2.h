@@ -2,6 +2,7 @@
 #include "..\..\Systems\Rooms.h"
 #include "..\..\Systems\Item.h"
 #include "..\..\Systems\Inventory.h"
+#include "..\Example Branch\ExampleBranch.h"
 
 /*
 void loadBranchExample(unordered_map<string, Room*> Rooms, unordered_map<string, Link*> Links, unordered_map<string, Container*> Containers)
@@ -17,40 +18,12 @@ void loadBranchExample(unordered_map<string, Room*> Rooms, unordered_map<string,
 Item* HeartKey = new Item();
 Item* DiamondKey = new Item();
 
-class EmptyLinkToRoom : public Link
-{
-public:
-	EmptyLinkToRoom(string cName, Room* cRoom) : Link(cName, cRoom)
-	{
-
-	}
-
-	bool checkConditions()
-	{
-		return true;
-	}
-};
-
-class EmptyLinkToContainer : public Link
-{
-public:
-	EmptyLinkToContainer(string cName, Container* cContainer) : Link(cName, cContainer)
-	{
-
-	}
-
-	bool checkConditions()
-	{
-		return true;
-	}
-};
-
 class BasicDoorCheck : public Link
 {
 private:
 	Inventory* mTrackedInventory;
 public:
-	BasicDoorCheck(string cName, Door* cDoor, Inventory* cInventory) : Link(cName, cRoom)
+	BasicDoorCheck(string cName, Room* cDoor, Inventory* cInventory) : Link(cName, cDoor)
 	{
 		mTrackedInventory = cInventory;
 	}
@@ -119,8 +92,8 @@ void initMansion2(unordered_map<string, Room*>* Rooms, unordered_map<string, Lin
 	(*Links).insert(pair<string, Link*>((*elToHeart).getName(), elToHeart));
 	(*Links).insert(pair<string, Link*>((*elToDiamond).getName(), elToDiamond));
 	(*Links).insert(pair<string, Link*>((*LinkToLockedDoor).getName(), LinkToLockedDoor));
-	(*Links).insert(pair<string, Link*>((*elToBloodTable).getName(), elToBloodTable);
-	(*Links).insert(pair<string, Link*>((*elToChemTable).getName(), elToChemTable);
+	(*Links).insert(pair<string, Link*>((*elToBloodTable).getName(), elToBloodTable));
+	(*Links).insert(pair<string, Link*>((*elToChemTable).getName(), elToChemTable));
 
 	//Connect Rooms with Links
 	(*(*Rooms)["Room of Return"]).addLink((*Links)["Empty Link to Heart Room"]);
@@ -128,7 +101,6 @@ void initMansion2(unordered_map<string, Room*>* Rooms, unordered_map<string, Lin
 	(*(*Rooms)["Room of Return"]).addLink((*Links)["Basic Key check for unlocking Door"]);
 	(*(*Rooms)["Heart Room"]).addLink((*Links)["Empty Link to Room of Return"]);
 	(*(*Rooms)["Diamond Room"]).addLink((*Links)["Empty Link to Room of Return"]);
-	(*(*Rooms)["Basic Key check for unlocking Door"]).addLink((*Links)["Empty Link to Room of Return"]);
 	(*(*Containers)["Blood Stained Table"]).addLink((*Links)["Empty Link to Heart Room"]);
 	(*(*Containers)["Chemical Lab Table"]).addLink((*Links)["Empty Link to Diamond Room"]);
 
@@ -183,5 +155,4 @@ void initMansion2(unordered_map<string, Room*>* Rooms, unordered_map<string, Lin
 	RoomDescription.push_back("Leave the Room.");
 	(*(*Rooms)["Diamond Room"]).addLinkDescription(RoomDescription);
 	RoomDescription.clear();
-	RoomDescription.push_back("You find that each cage has grotesque experiments held within, which some containing two headed rats, others some type of bug-like creatures, and in the last one a diamond shaped key thankfully.");
 }

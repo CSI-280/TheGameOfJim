@@ -2,6 +2,7 @@
 #include "..\..\Systems\Rooms.h"
 #include "..\..\Systems\Item.h"
 #include "..\..\Systems\Inventory.h"
+#include "..\Example Branch\ExampleBranch.h"
 
 /*
 void loadBranchExample(unordered_map<string, Room*> Rooms, unordered_map<string, Link*> Links, unordered_map<string, Container*> Containers)
@@ -18,67 +19,6 @@ Item* Note = new Item();
 Item* moldyBread = new Item();
 Item* healthPotion = new Item();
 
-class EmptyLinkToRoom : public Link
-{
-public:
-    EmptyLinkToRoom(string cName, Room* cRoom) : Link(cName, cRoom)
-    {
-
-    }
-
-    bool checkConditions()
-    {
-        return true;
-    }
-};
-
-class EmptyLinkToContainer : public Link
-{
-public:
-    EmptyLinkToContainer(string cName, Container* cContainer) : Link(cName, cContainer)
-    {
-
-    }
-
-    bool checkConditions()
-    {
-        return true;
-    }
-};
-
-class BasicKeyCheck : public Link
-{
-private:
-    Inventory* mTrackedInventory;
-public:
-    BasicKeyCheck(string cName, Container* cContainer, Inventory* cInventory) : Link(cName, cContainer)
-    {
-        mTrackedInventory = cInventory;
-    }
-
-    bool checkConditions()
-    {
-        if ((*mTrackedInventory).checkPlayerInventoryForItem(*BlandKey))
-        {
-            cout << "You Unlock the chest with the Key!" << endl;
-            return true;
-        }
-        else
-        {
-            cout << "You can't open the chest without the key!" << endl;
-            return false;
-        }
-    }
-};
-
-class MoveToNextRoom : public Link
-{
-public:
-    bool checkConditions()
-    {
-        return true;
-    }
-};
 void initKitchen(unordered_map<string, Room*>* Rooms, unordered_map<string, Link*>* Links, unordered_map<string, Container*>* Containers, Inventory* Inventory)
 {
     
@@ -86,10 +26,11 @@ void initKitchen(unordered_map<string, Room*>* Rooms, unordered_map<string, Link
     //(*BlandKey).setName("Bland Key");
     //(*HealthPotion).setName("Health Potion");
     Room* abandonedKitchen = new Room("Abandoned Kitchen"); //boring shed
-    Container* dilapidatedCabinets = new Container("Dilapidated Cabinets", Inventory, false, true); //boring crate
-    Container* Fridge = new Container("Fridge", Inventory, false, true); //boring chest
+    Container* dilapidatedCabinets = new Container("Dilapidated Cabinets", Inventory, false, false); //boring crate
+    Container* Fridge = new Container("Fridge", Inventory, false, false); //boring chest
     EmptyLinkToRoom* elToKitchen = new EmptyLinkToRoom("Empty Link to the kitchen", abandonedKitchen);
     EmptyLinkToContainer* elToCabinets = new EmptyLinkToContainer("Empty Link to the cabinets", dilapidatedCabinets);
+	EmptyLinkToContainer* elToFridge = new EmptyLinkToContainer("Empty Link to Fridge", Fridge);
 
 
 
@@ -99,17 +40,16 @@ void initKitchen(unordered_map<string, Room*>* Rooms, unordered_map<string, Link
     (*Containers).insert(pair<string, Container*>((*Fridge).getName(), Fridge));
     (*Links).insert(pair<string, Link*>((*elToKitchen).getName(), elToKitchen));
     (*Links).insert(pair<string, Link*>((*elToCabinets).getName(), elToCabinets));
-    (*Links).insert(pair<string, Link*>((*elToFridge).getName(), LinkToBoringChest));
+    (*Links).insert(pair<string, Link*>((*elToFridge).getName(), elToFridge));
 
     //Connect Rooms with Links
-    (*(*Rooms)["Abandoned Kitchen"]).addLink((*Links)["Empty Link to Dilapidated Cabinets"]);
-    //(*(*Rooms)["Abandoned Kitchen"]).addLink((*Links)["Basic Key Check to Fridge"]);
-    (*(*Containers)["Dilapidated Cabinets"]).addLink((*Links)["Empty Link to Abandoned Kitchen"]);
-    (*(*Containers)["Fridge"]).addLink((*Links)["Empty Link to Abandoned Kitchen"]);
+    (*(*Rooms)["Abandoned Kitchen"]).addLink((*Links)["Empty Link to the cabinets"]);
+    (*(*Rooms)["Abandoned Kitchen"]).addLink((*Links)["Empty Link to Fridge"]);
+    (*(*Containers)["Dilapidated Cabinets"]).addLink((*Links)["Empty Link to the kitchen"]);
+    (*(*Containers)["Fridge"]).addLink((*Links)["Empty Link to the kitchen"]);
 
     //Detailing
     (*(*Containers)["Dilapidated Cabinets"]).addItems(Note);//add in something like a Note for plot development
-    Note.setDescription("Moon's Haunted")
     (*(*Containers)["Fridge"]).addItems(moldyBread);//add in trash like moldyBread
     vector<string> RoomDescription;
     RoomDescription.push_back("You enter into the kitchen, it looks like it has been ransacked ");
@@ -137,24 +77,19 @@ void initKitchen(unordered_map<string, Room*>* Rooms, unordered_map<string, Link
 
 void initLivingRoom(unordered_map<string, Room*>* Rooms, unordered_map<string, Link*>* Links, unordered_map<string, Container*>* Containers, Inventory* Inventory)
 {
-    //Initalize Data
+    //Initalize Datafewfgw
     //(*BlandKey).setName("Bland Key");
     //(*HealthPotion).setName("Health Potion");
     Room* ravagedLivingRoom = new Room("Ravaged Living Room"); //boring shed
-    EmptyLinkToRoom* elToRavagedLivingRoom = new EmptyLinkToRoom("Empty Link to the kitchen", ravagedLivingRoom);
+    EmptyLinkToRoom* elToRavagedLivingRoom = new EmptyLinkToRoom("Empty Link to the living room", ravagedLivingRoom);
     //Store Data in Maps
     (*Rooms).insert(pair<string, Room*>((*ravagedLivingRoom).getName(), ravagedLivingRoom));
-    (*Containers).insert(pair<string, Container*>((*dilapidatedCabinets).getName(), dilapidatedCabinets));
-    (*Containers).insert(pair<string, Container*>((*Fridge).getName(), Fridge));
-    (*Links).insert(pair<string, Link*>((*elToravagedLivingRoom).getName(), elToravagedLivingRoom));
-    (*Links).insert(pair<string, Link*>((*elToCabinets).getName(), elToCabinets));
-    (*Links).insert(pair<string, Link*>((*elToFridge).getName(), LinkToBoringChest));
 
     //Connect Rooms with Links
-    (*(*Rooms)["ravagedLivingRoom"]).addLink((*Links)["Empty Link to Dilapidated Cabinets"]);
+    (*(*Rooms)["Ravaged Living Room"]).addLink((*Links)["Empty Link to Dilapidated Cabinets"]);
     //(*(*Rooms)["Abandoned ravagedLivingRoom"]).addLink((*Links)["Basic Key Check to Fridge"]);
-    (*(*Containers)["Dilapidated Cabinets"]).addLink((*Links)["Empty Link to Abandoned ravagedLivingRoom"]);
-    (*(*Containers)["Fridge"]).addLink((*Links)["Empty Link to ravagedLivingRoom"]);
+    (*(*Containers)["Dilapidated Cabinets"]).addLink((*Links)["Empty Link to the living room"]);
+    (*(*Containers)["Fridge"]).addLink((*Links)["Empty Link to the living room"]);
 
     //Detailing
     vector<string> RoomDescription;
@@ -162,7 +97,7 @@ void initLivingRoom(unordered_map<string, Room*>* Rooms, unordered_map<string, L
     RoomDescription.push_back("There appear to be burn marks in small circles everywhere, like tiny lightning strikes");
     RoomDescription.push_back("The broken tv has what appears to be bullet holes in it.");
     RoomDescription.push_back("in the middle of room, you see a completely clean and unaffected circle, perhaps something special happened here.");
-    (*(*Rooms)["ravagedLivingRoom"]).addRoomDescription(RoomDescription);
+    (*(*Rooms)["Ravaged Living Room"]).addRoomDescription(RoomDescription);
     RoomDescription.clear();
 
 }
@@ -175,9 +110,10 @@ void goingOutside(unordered_map<string, Room*>* Rooms, unordered_map<string, Lin
     Room* rightOutside = new Room("Outside the broken house"); //boring shed
     Container* halfCar = new Container("Car split cleanly in half", Inventory, false, true); //boring crate
     Container* mailbox = new Container("mailbox", Inventory, false, true); //boring chest
-    EmptyLinkToRoom* elToOutside = new EmptyLinkToRoom("Empty Link to the kitchen", rightOutside);
+    EmptyLinkToRoom* elToOutside = new EmptyLinkToRoom("Empty Link to Outside the broken house", rightOutside);
     EmptyLinkToContainer* elTohalfCar = new EmptyLinkToContainer("Empty Link to the halfCar", halfCar);
-    (*healthPotion).name = "Health Potion";
+	EmptyLinkToContainer* eltomailbox = new EmptyLinkToContainer("Empty Link to the Mailbox", mailbox);
+    (*healthPotion).setName("Health Potion");
 
     //Store Data in Maps
     (*Rooms).insert(pair<string, Room*>((*rightOutside).getName(), rightOutside));
@@ -185,11 +121,11 @@ void goingOutside(unordered_map<string, Room*>* Rooms, unordered_map<string, Lin
     (*Containers).insert(pair<string, Container*>((*mailbox).getName(), mailbox));
     (*Links).insert(pair<string, Link*>((*elToOutside).getName(), elToOutside));
     (*Links).insert(pair<string, Link*>((*elTohalfCar).getName(), elTohalfCar));
-    (*Links).insert(pair<string, Link*>((*elTomailbox).getName(), LinkToBoringChest));
+    (*Links).insert(pair<string, Link*>((*eltomailbox).getName(), eltomailbox));
 
     //Connect Rooms with Links
-    (*(*Rooms)["Outside the broken house"]).addLink((*Links)["Empty Link to Car split cleanly in half"]);
-    //(*(*Rooms)["Outside the broken house"]).addLink((*Links)["Basic Key Check to mailbox"]);
+    (*(*Rooms)["Outside the broken house"]).addLink((*Links)["Empty Link to the halfCar"]);
+    (*(*Rooms)["Outside the broken house"]).addLink((*Links)["Empty Link to the Mailbox"]);
     (*(*Containers)["Car split cleanly in half"]).addLink((*Links)["Empty Link to Outside the broken house"]);
     (*(*Containers)["mailbox"]).addLink((*Links)["Empty Link to Outside the broken house"]);
 

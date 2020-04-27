@@ -2,6 +2,7 @@
 #include "..\..\Systems\Rooms.h"
 #include "..\..\Systems\Item.h"
 #include "..\..\Systems\Inventory.h"
+#include "..\Example Branch\ExampleBranch.h"
 
 /*
 void loadBranchExample(unordered_map<string, Room*> Rooms, unordered_map<string, Link*> Links, unordered_map<string, Container*> Containers)
@@ -14,118 +15,33 @@ void loadBranchExample(unordered_map<string, Room*> Rooms, unordered_map<string,
 }
 */
 
-Item* BlandKey = new Item();
-Item* HealthPotion = new Item();
-
-class EmptyLinkToRoom : public Link
-{
-public:
-	EmptyLinkToRoom(string cName, Room* cRoom) : Link(cName, cRoom)
-	{
-
-	}
-
-	bool checkConditions()
-	{
-		return true;
-	}
-};
-
-class EmptyLinkToContainer : public Link
-{
-public:
-	EmptyLinkToContainer(string cName, Container* cContainer) : Link(cName, cContainer)
-	{
-
-	}
-
-	bool checkConditions()
-	{
-		return true;
-	}
-};
-
-class BasicKeyCheck : public Link
-{
-private:
-	Inventory* mTrackedInventory;
-public:
-	BasicKeyCheck(string cName, Container* cContainer, Inventory* cInventory) : Link(cName, cContainer)
-	{
-		mTrackedInventory = cInventory;
-	}
-
-	bool checkConditions()
-	{
-		if ((*mTrackedInventory).checkPlayerInventoryForItem(*BlandKey))
-		{
-			cout << "You Unlock the lock with the Key!" << endl;
-			return true;
-		}
-		else
-		{
-			cout << "You can't open the lock without the key!" << endl;
-			return false;
-		}
-	}
-};
-
-class BasicDoorCheck : public Link
-{
-private:
-	Inventory* mTrackedInventory;
-public:
-	BasicDoorCheck(string cName, Door* cDoor, Inventory* cInventory) : Link(cName, cRoom)
-	{
-		mTrackedInventory = cInventory;
-	}
-
-	bool checkConditions()
-	{
-		if ((*mTrackedInventory).checkPlayerInventoryForItem(*HeartKey))
-		{
-			cout << "You opened the lock with the keys" << endl;
-			return true;
-		}
-		else
-		{
-			cout << "You can't open the lock without the keys!" << endl;
-			return false;
-		}
-	}
+//Item* BlandKey = new Item();
+//Item* HealthPotion = new Item();
 
 void initMansion(unordered_map<string, Room*>* Rooms, unordered_map<string, Link*>* Links, unordered_map<string, Container*>* Containers, Inventory* Inventory)
 {
 	//Initalize Data
-	(*BlandKey).name = "Small Key";
-	(*HealthPotion).name = "Health Potion";
 	Room* decrepitedHall = new Room("Decrepited Hallway");
 	Container* dustyTable = new Container("Dusty Table", Inventory, false, true);
 	Container* lockedChest = new Container("Locked Chest", Inventory, false, true);
-	Door* lockedDoor = new Door("Locked Door");
 	EmptyLinkToRoom* elToDecrepitedHall = new EmptyLinkToRoom("Empty Link to Decrepited Hallway", decrepitedHall);
 	EmptyLinkToContainer* elToDustyTable = new EmptyLinkToContainer("Empty Link to Dusty Table", dustyTable);
 	BasicKeyCheck* LinkToLockedChest = new BasicKeyCheck("Basic Key Check to Locked Chest", lockedChest, Inventory);
-	BasicDoorCheck* LinkToLockedDoor = new BasicDoorCheck("Basic Key check for unlocking Door", lockedDoor, Inventory);
 
 
 	//Store Data in Maps
 	(*Rooms).insert(pair<string, Room*>((*decrepitedHall).getName(), decrepitedHall));
 	(*Containers).insert(pair<string, Container*>((*dustyTable).getName(), dustyTable));
 	(*Containers).insert(pair<string, Container*>((*lockedChest).getName(), lockedChest));
-	(*Door).insert(pair<string, Door*>((*lockedDoor).getName(), lockedDoor));
 	(*Links).insert(pair<string, Link*>((*elToDecrepitedHall).getName(), elToDecrepitedHall));
-	(*Links).insert(pair<string, Link*>((*elToDustyTable).getName(), elToDustyTable);
+	(*Links).insert(pair<string, Link*>((*elToDustyTable).getName(), elToDustyTable));
 	(*Links).insert(pair<string, Link*>((*LinkToLockedChest).getName(), LinkToLockedChest));
-	(*Links).insert(pair<string, Link*>((*LinkToLockedDoor).getName(), LinkToLockedDoor));
 
 	//Connect Rooms with Links
-	(*(*Rooms)["Decrepited Hallway"]).addLink((*Links)["Empty Link to Dusty Crate"]);
+	(*(*Rooms)["Decrepited Hallway"]).addLink((*Links)["Empty Link to Dusty Table"]);
 	(*(*Rooms)["Decrepited Hallway"]).addLink((*Links)["Basic Key Check to Locked Chest"]);
-	(*(*Rooms)["Decrepited Hallway"]).addLink((*Links)["Basic Key check for unlocking Door"]);
 	(*(*Containers)["Dusty Table"]).addLink((*Links)["Empty Link to Decrepited Hallway"]);
 	(*(*Containers)["Locked Chest"]).addLink((*Links)["Empty Link to Decrepited Hallway"]);
-	(*(*Containers)["Locked Door"]).addLink((*Links)["Empty Link to Decrepited Hallway"]);
 
 	//Detailing
 	(*(*Containers)["Dusty Table"]).addItems(BlandKey);
@@ -140,7 +56,6 @@ void initMansion(unordered_map<string, Room*>* Rooms, unordered_map<string, Link
 	RoomDescription.clear();
 	RoomDescription.push_back("Inspect the Table");
 	RoomDescription.push_back("Inspect the Chest");
-	RoomDescription.push_back("Inspect the Door");
 	(*(*Rooms)["Decrepited Hallway"]).addLinkDescription(RoomDescription);
 	RoomDescription.clear();
 	RoomDescription.push_back("You open up the drawer of the table.");
@@ -155,5 +70,4 @@ void initMansion(unordered_map<string, Room*>* Rooms, unordered_map<string, Link
 	RoomDescription.push_back("That's all there is inside the chest, kinda anti climatic but atleast it's useful.");
 	(*(*Containers)["Locked Chest"]).addLinkDescription(RoomDescription);
 	RoomDescription.clear();
-	RoomDescription.push_back("The lock falls off and you swing the door open to find....*insert brief description of next room later*.");
 }

@@ -2,6 +2,7 @@
 #include "..\..\Systems\Rooms.h"
 #include "..\..\Systems\Item.h"
 #include "..\..\Systems\Inventory.h"
+#include "..\Example Branch\ExampleBranch.h"
 
 /*
 void loadBranchExample(unordered_map<string, Room*> Rooms, unordered_map<string, Link*> Links, unordered_map<string, Container*> Containers)
@@ -19,74 +20,12 @@ Item* candyBar = new Item();
 Item* magazine = new Item();
 Item* healthPotion = new Item();
 
-class EmptyLinkToRoom : public Link
-{
-public:
-	EmptyLinkToRoom(string cName, Room* cRoom) : Link(cName, cRoom)
-	{
-
-	}
-
-	bool checkConditions()
-	{
-		return true;
-	}
-};
-
-class EmptyLinkToContainer : public Link
-{
-public:
-	EmptyLinkToContainer(string cName, Container* cContainer) : Link(cName, cContainer)
-	{
-
-	}
-
-	bool checkConditions()
-	{
-		return true;
-	}
-};
-
-class BasicKeyCheck : public Link
-{
-private:
-	Inventory* mTrackedInventory;
-public:
-	BasicKeyCheck(string cName, Container* cContainer, Inventory* cInventory) : Link(cName, cContainer)
-	{
-		mTrackedInventory = cInventory;
-	}
-
-	bool checkConditions()
-	{
-		if ((*mTrackedInventory).checkPlayerInventoryForItem(*BlandKey))
-		{
-			cout << "You Unlock the chest with the Key!" << endl;
-			return true;
-		}
-		else
-		{
-			cout << "You can't open the chest without the key!" << endl;
-			return false;
-		}
-	}
-};
-
-class MoveToNextRoom : public Link
-{
-public:
-	bool checkConditions()
-	{
-		return true;
-	}
-};
-
 void initConvenienceStore(unordered_map<string, Room*>* Rooms, unordered_map<string, Link*>* Links, unordered_map<string, Container*>* Containers, Inventory* Inventory)
 {
 	//Initalize Data
-	(*ramenNoodles).name = "Ramen Noodles";
-	(*candyBar).name = "Candy Bar";
-	(*magazine).name = "Magazine";
+	(*ramenNoodles).setName("Ramen Noodles");
+	(*candyBar).setName("Candy Bar");
+	(*magazine).setName("Magazine");
 
 	Room* convenienceStore = new Room("Convenience Store");
 	Room* dustyShed = new Room("Dusty Shed");
@@ -158,7 +97,7 @@ void initConvenienceStore(unordered_map<string, Room*>* Rooms, unordered_map<str
 void initDustyShed(unordered_map<string, Room*>* Rooms, unordered_map<string, Link*>* Links, unordered_map<string, Container*>* Containers, Inventory* Inventory)
 {
 	//Initalize Data
-	(*healthPotion).name = "Health Potion";
+	(*healthPotion).setName("Health Potion");
 
 	Room* convenienceStore = new Room("Convenience Store");
 	Room* dustyShed = new Room("Dusty Shed");
