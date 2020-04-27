@@ -31,11 +31,13 @@ class Link
 	private:
 		Container* mContainer;
 		Room *mRoom;
+		Door* mDoor
 		bool mType;
 		string mName;
 	public:
 		Link(string cName, Container* cContainer);
 		Link(string cName, Room* cRoom);
+		Link(string cName, Door* cDoor);
 		Link() {};
 		string getName();
 		virtual bool checkConditions() = 0;
@@ -97,4 +99,29 @@ class Room
 		void addLinkDescription(vector<string> cDescription);
 		void printAll(bool printName = false);
 		Link* executeRoom();
+};
+
+class Door
+{
+	/*
+	Containers may contain items. They work similarly to rooms, allowing links in and out of them.
+	You can specify if the player may add items to the container (storage) and if the player may
+	remove items from the container to take them (takeable). Both default to true.
+	Containers are assumed to be unlocked. To lock a container, use a Link!
+	Containers need a pointer to the inventory to modify it. (Likely the player's.)
+	*/
+private:
+	string mName;
+	vector<string> mContainerDescription;
+	vector<Link*> mLinks;
+	vector<string> mLinkDescription;
+public:
+	Door(string cName)
+	string getName();
+	void addItems(Item* cItem);
+	void addLink(Link* cLink);
+	void addDoorDescription(vector<string> cDescription);
+	void addLinkDescription(vector<string> cDescription);
+	void printAll(bool printName = false);
+	Link* executeDoor();
 };
