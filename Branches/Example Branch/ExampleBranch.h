@@ -71,8 +71,8 @@ public:
 void initBoringBranch(unordered_map<string, Room*>* Rooms, unordered_map<string, Link*>* Links, unordered_map<string, Container*>* Containers, Inventory* Inventory)
 {
 	//Initalize Data
-	//(*BlandKey).setName("Bland Key");
-	//(*HealthPotion).setName("Health Potion");
+	(*BlandKey).setName("Bland Key");
+	(*HealthPotion).setName("Health Potion");
 	Room* boringShed = new Room("Boring Shed");
 	Container* boringCrate = new Container("Boring Crate", Inventory, false, true);
 	Container* boringChest = new Container("Boring Chest", Inventory, false, true);
@@ -98,25 +98,31 @@ void initBoringBranch(unordered_map<string, Room*>* Rooms, unordered_map<string,
 	(*(*Containers)["Boring Crate"]).addItems(BlandKey);
 	(*(*Containers)["Boring Chest"]).addItems(BlandKey);
 	vector<string> RoomDescription;
+
 	RoomDescription.push_back("You walk into the shed.");
 	RoomDescription.push_back("The shed is completely barren except for a single table.");
 	RoomDescription.push_back("On the Table is a simple looking wooden crate");
 	RoomDescription.push_back("and a bland wooden chest, locked with a sturdy iron padlock.");
 	(*(*Rooms)["Boring Shed"]).addRoomDescription(RoomDescription);
 	RoomDescription.clear();
+
 	RoomDescription.push_back("Inspect the Crate");
 	RoomDescription.push_back("Inspect the Chest");
 	(*(*Rooms)["Boring Shed"]).addLinkDescription(RoomDescription);
 	RoomDescription.clear();
+
 	RoomDescription.push_back("You open up the crate.");
 	(*(*Containers)["Boring Crate"]).addContainerDescription(RoomDescription);
 	RoomDescription.clear();
+
 	RoomDescription.push_back("Stop Looking at the Crate.");
 	(*(*Containers)["Boring Crate"]).addLinkDescription(RoomDescription);
 	RoomDescription.clear();
+
 	RoomDescription.push_back("You open up the chest.");
 	(*(*Containers)["Boring Chest"]).addContainerDescription(RoomDescription);
 	RoomDescription.clear();
+
 	RoomDescription.push_back("Stop Looking at the Chest.");
 	(*(*Containers)["Boring Chest"]).addLinkDescription(RoomDescription);
 	RoomDescription.clear();
