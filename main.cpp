@@ -15,6 +15,7 @@
 #include "Systems\Rooms.h"
 #include "Branches/intro.h"
 #include "Branches/Example Branch/ExampleBranch.h"
+#include "Branches/Rapture Branch/RaptureBranch.h"
 using namespace std;
 
 int main()
@@ -29,9 +30,10 @@ int main()
 	Inventory playerInventory;
 
 	initBoringBranch(&RoomTable, &LinkTable, &ContainerTable, &playerInventory);
+	initRaptureBranch(&RoomTable, &LinkTable, &ContainerTable, &playerInventory, &testPlayer);
 
 	//intro(testPlayer);
-	playGame(LinkTable["Empty Link to Boring Shed"]);
+	playGame(LinkTable["Link to LakeFront"]);
 
 
 	// combat(testPlayer, testEnemy);
@@ -43,6 +45,7 @@ int main()
 		run playGame() with a pointer to the first room.
 	*/
 
+	deleteall(&RoomTable, &LinkTable, &ContainerTable);
 	string noQuit;
 	cin >> noQuit;
 	return 0;
